@@ -2598,7 +2598,8 @@
       #view-settings .st-layout {
         flex-direction: row;
         gap: 0;
-        overflow: hidden;
+        overflow-x: clip;
+        overflow-y: visible;
         min-height: calc(100svh - 160px);
         align-items: flex-start;
       }
@@ -2613,15 +2614,19 @@
         background: transparent;
         border: none;
         border-radius: 0;
-        transition: margin-left 0.34s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.34s cubic-bezier(0.4, 0, 0.2, 1);
       }
       #view-settings.st-panel-open .st-nav {
-        margin-left: -100%;
+        transform: translateX(-100%);
       }
       #view-settings .st-content {
         width: 100%;
         min-width: 100%;
         flex-shrink: 0;
+        transition: transform 0.34s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      #view-settings.st-panel-open .st-content {
+        transform: translateX(-100%);
       }
 
       /* Nav items — grid layout on mobile */
