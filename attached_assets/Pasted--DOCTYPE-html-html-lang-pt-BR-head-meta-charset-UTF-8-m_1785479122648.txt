@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=390, initial-scale=1.0" />
+  <title>Settings — Mobile UI</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/400.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/500.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/600.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5/500.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5/600.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5/700.css" />
+  <style>
+    *,*::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:          #000000;
+      --text:        #f0f0f0;
+      --text-2:      #bbbbbb;
+      --text-3:      rgba(255,255,255,0.45);
+      --text-4:      rgba(255,255,255,0.28);
+      --accent:      #FFF5F5;
+      --accent-soft: rgba(255,245,245,0.12);
+      --accent-line: rgba(255,245,245,0.22);
+      --line:        rgba(255,255,255,0.06);
+      --line-2:      rgba(255,255,255,0.08);
+      --line-3:      rgba(255,255,255,0.14);
+      --sans:  "Inter", ui-sans-serif, system-ui, sans-serif;
+      --head:  "Montserrat", ui-sans-serif, system-ui, sans-serif;
+      --r-sm: 6px;
+      --r-md: 8px;
+      --r-lg: 12px;
+      --r-xl: 20px;
+    }
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100svh;
+    }
+    /* ── Fake phone shell ── */
+    .phone {
+      width: 390px;
+      min-height: 100svh;
+      margin: 0 auto;
+      padding: 52px 20px 100px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* ── Fake top bar ── */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+    .topbar-logo svg {
+      width: 36px; height: 22px;
+      fill: none; stroke: #f0f0f0;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .topbar-right {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .topbar-credits {
+      display: flex; align-items: center; gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(255,215,90,0.12);
+      border: 1px solid rgba(255,215,90,0.22);
+      font-family: var(--head);
+      font-size: 12px;
+      font-weight: 600;
+      color: #f0c674;
+      letter-spacing: 0.02em;
+    }
+    .topbar-credits svg {
+      width: 14px; height: 14px;
+      stroke: #f0c674; fill: none;
+      stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .topbar-avatar {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--head);
+      font-size: 11px; font-weight: 700;
+      color: var(--text-2);
+    }
+    /* ── Page header (matches billing) ── */
+    .page-header { margin: 0 0 22px; }
+    .page-header h1 {
+      font-family: var(--head);
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: #f3f3f3;
+      margin-bottom: 5px;
+    }
+    .page-header p {
+      font-family: var(--sans);
+      font-size: 13.5px;
+      color: rgba(255,255,255,0.38);
+      line-height: 1.45;
+    }
+    /* ── Settings slide container ── */
+    .st-layout {
+      display: flex;
+      flex-direction: row;
+      overflow: hidden;
+      gap: 0;
+    }
+
+    /* ─────────────────────────────────────────────
+       NAV DOS SETTINGS — REFEITA NO ESTILO DA REFERÊNCIA
+       Mantive o fundo da página, título, topbar e dock iguais.
+       Aqui só muda a estrutura interna dos itens de configurações.
+    ───────────────────────────────────────────── */
+    .st-nav {
+      width: 100%;
+      min-width: 100%;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      transition: margin-left 0.34s cubic-bezier(0.4, 0, 0.2, 1);
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      overflow: visible;
+    }
+    .st-panel-open .st-nav { margin-left: -100%; }
+
+    .st-profile-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.075);
+      overflow: hidden;
+      transition: background .16s ease, border-color .16s ease, transform .16s ease;
+    }
+    .st-profile-card:hover,
+    .st-profile-card:focus-visible {
+      background: rgba(255,255,255,0.045);
+      border-color: rgba(255,255,255,0.13);
+      transform: translateY(-1px);
+      outline: none;
+    }
+    .st-profile-card:active {
+      transform: translateY(0) scale(.995);
+      background: rgba(255,255,255,0.055);
+    }
+    .st-profile-shell {
+      display: block;
+      padding: 14px;
+      position: relative;
+    }
+    .st-profile-shell::before {
+      content: "";
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      top: 0;
+      height: 1px;
+      background: rgba(255,255,255,0.11);
+      pointer-events: none;
+    }
+    .st-profile-topline {
+      display: grid;
+      grid-template-columns: 46px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+    .st-profile-avatar-wrap {
+      width: 46px;
+      height: 46px;
+      position: relative;
+      flex: 0 0 auto;
+    }
+    .st-profile-photo {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.075);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--text);
+      font-family: var(--head);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+    .st-profile-copy {
+      min-width: 0;
+    }
+    .st-profile-kicker {
+      display: block;
+      margin-bottom: 5px;
+      color: rgba(255,255,255,0.30);
+      font-family: var(--head);
+      font-size: 9.5px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+    .st-profile-name-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      margin-bottom: 4px;
+    }
+    .st-profile-name {
+      min-width: 0;
+      color: var(--text);
+      font-size: 15.5px;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.12;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .st-profile-handle {
+      flex: 0 0 auto;
+      color: rgba(255,255,255,0.36);
+      font-size: 11.5px;
+      font-weight: 400;
+      line-height: 1;
+    }
+    .st-profile-desc {
+      display: block;
+      min-width: 0;
+      color: rgba(255,255,255,0.42);
+      font-size: 11.8px;
+      line-height: 1.25;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .st-profile-edit {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.68);
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      transition: color .16s ease, background .16s ease, border-color .16s ease;
+    }
+    .st-profile-card:hover .st-profile-edit,
+    .st-profile-card:focus-visible .st-profile-edit {
+      color: rgba(255,255,255,0.90);
+      background: rgba(255,255,255,0.065);
+      border-color: rgba(255,255,255,0.13);
+    }
+    .st-group { display: flex; flex-direction: column; gap: 8px; }
+    .st-group-title {
+      padding: 0 1px;
+      color: var(--text);
+      font-family: var(--head);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+    .st-group-list {
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+    .st-nav-item {
+      display: grid;
+      grid-template-columns: 22px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      min-height: 62px;
+      padding: 12px 12px;
+      border: none;
+      border-bottom: 1px solid rgba(255,255,255,0.055);
+      background: transparent;
+      color: var(--text-2);
+      font-family: var(--sans);
+      cursor: pointer;
+      text-align: left;
+      text-decoration: none;
+      position: relative;
+      transition: background .14s ease, color .14s ease;
+    }
+    .st-nav-item:last-child { border-bottom: none; }
+    .st-nav-item:hover,
+    .st-nav-item:focus-visible {
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      outline: none;
+    }
+    .st-nav-item:active { background: rgba(255,255,255,0.06); }
+    .st-nav-item > svg:first-child {
+      width: 18px;
+      height: 18px;
+      justify-self: center;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      color: rgba(255,255,255,0.68);
+      transition: color .14s ease, transform .14s ease;
+    }
+    .st-nav-copy { min-width: 0; }
+    .st-nav-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      margin-bottom: 4px;
+    }
+    .st-nav-title {
+      min-width: 0;
+      color: rgba(255,255,255,0.88);
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .st-nav-pill {
+      flex: 0 0 auto;
+      max-width: 104px;
+      padding: 3px 6px;
+      border-radius: 999px;
+      color: rgba(255,255,255,0.58);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.065);
+      font-size: 9.5px;
+      font-weight: 600;
+      line-height: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .st-nav-desc {
+      display: block;
+      max-width: 258px;
+      color: rgba(255,255,255,0.40);
+      font-size: 11.3px;
+      line-height: 1.35;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .st-nav-chevron {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      color: rgba(255,255,255,0.24);
+      transition: color .14s ease, transform .14s ease;
+    }
+    .st-nav-chevron svg {
+      width: 15px;
+      height: 15px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .st-nav-item:hover > svg:first-child,
+    .st-nav-item:focus-visible > svg:first-child {
+      color: rgba(255,255,255,0.95);
+      transform: scale(1.04);
+    }
+    .st-nav-item:hover .st-nav-chevron,
+    .st-nav-item:focus-visible .st-nav-chevron {
+      color: rgba(255,255,255,0.50);
+      transform: translateX(2px);
+    }
+    /* ───────────────────────────────────────────── */
+
+    /* ── Sub-page content ── */
+    .st-content {
+      width: 100%;
+      min-width: 100%;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    /* Back button */
+    .st-mobile-back {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      padding: 0 0 20px;
+      color: rgba(255,255,255,0.55);
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      background: none;
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+    }
+    .st-mobile-back svg {
+      width: 20px; height: 20px;
+      stroke: currentColor; fill: none;
+      stroke-width: 2;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+    /* Sub-page panel */
+    .st-panel { display: none; flex-direction: column; gap: 16px; }
+    .st-panel.active { display: flex; }
+    /* Placeholder panel card */
+    .st-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .st-card-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .st-card-title {
+      font-family: var(--head);
+      font-size: 14px; font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    .st-card-body {
+      padding: 18px;
+      font-size: 13.5px;
+      color: var(--text-3);
+      line-height: 1.55;
+    }
+    /* ── Bottom dock ── */
+    .dock {
+      position: fixed;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 350px;
+      background: rgba(18,18,18,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 10px 8px;
+      gap: 4px;
+    }
+    .dock-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      flex: 1;
+      padding: 4px 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: rgba(255,255,255,0.35);
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 500;
+      transition: color .15s;
+    }
+    .dock-item svg {
+      width: 20px; height: 20px;
+      stroke: currentColor; fill: none;
+      stroke-width: 1.7;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+    .dock-item.active { color: var(--text); }
+  </style>
+</head>
+<body>
+<div class="phone">
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="topbar-logo">
+      <svg viewBox="0 0 36 22">
+        <ellipse cx="18" cy="11" rx="16" ry="9" stroke-width="1.6"/>
+        <circle cx="18" cy="11" r="4" stroke-width="1.6"/>
+        <line x1="2" y1="11" x2="14" y2="11"/>
+        <line x1="22" y1="11" x2="34" y2="11"/>
+      </svg>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-credits">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M9 10h4.5a1.5 1.5 0 0 1 0 3H9"/></svg>
+        3,412
+      </div>
+      <div class="topbar-avatar">PN</div>
+    </div>
+  </div>
+
+  <!-- Settings view -->
+  <section id="view-settings">
+    <!-- Page header (matches Billing style) -->
+    <div class="page-header">
+      <h1>Settings</h1>
+      <p>Manage your account &amp; preferences.</p>
+    </div>
+
+    <!-- Slide container -->
+    <div class="st-layout" id="st-layout">
+      <!-- Menu list -->
+      <nav class="st-nav" id="st-nav">
+        <a class="st-profile-card" href="#">
+          <span class="st-profile-shell">
+            <span class="st-profile-topline">
+              <span class="st-profile-avatar-wrap">
+                <span class="st-profile-photo">PN</span>
+              </span>
+
+              <span class="st-profile-copy">
+                <span class="st-profile-kicker">Account</span>
+                <span class="st-profile-name-row">
+                  <span class="st-profile-name">My Account</span>
+                  <span class="st-profile-handle">@profile</span>
+                </span>
+                <span class="st-profile-desc">Profile and account data</span>
+              </span>
+
+              <span class="st-profile-edit">Edit</span>
+            </span>
+          </span>
+        </a>
+
+        <div class="st-group">
+          <h2 class="st-group-title">Account</h2>
+          <div class="st-group-list">
+            <button class="st-nav-item" type="button" data-st-tab="security">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+              <span class="st-nav-copy">
+                <span class="st-nav-line"><span class="st-nav-title">Security</span><span class="st-nav-pill">High</span></span>
+                <span class="st-nav-desc">2FA, password and trusted access</span>
+              </span>
+              <span class="st-nav-chevron"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+            </button>
+
+            <button class="st-nav-item" type="button" data-st-tab="sessions">
+              <svg viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+              <span class="st-nav-copy">
+                <span class="st-nav-line"><span class="st-nav-title">Sessions</span><span class="st-nav-pill">2 active</span></span>
+                <span class="st-nav-desc">Devices currently signed in</span>
+              </span>
+              <span class="st-nav-chevron"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+            </button>
+
+            <button class="st-nav-item" type="button" data-st-tab="preferences">
+              <svg viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+              <span class="st-nav-copy">
+                <span class="st-nav-line"><span class="st-nav-title">Preferences</span><span class="st-nav-pill">UI</span></span>
+                <span class="st-nav-desc">Language, region and interface</span>
+              </span>
+              <span class="st-nav-chevron"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="st-group">
+          <h2 class="st-group-title">Developer</h2>
+          <div class="st-group-list">
+            <button class="st-nav-item" type="button" data-st-tab="api-keys">
+              <svg viewBox="0 0 24 24"><path d="m21 2-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+              <span class="st-nav-copy">
+                <span class="st-nav-line"><span class="st-nav-title">API Keys</span><span class="st-nav-pill">Tokens</span></span>
+                <span class="st-nav-desc">Tokens and developer access</span>
+              </span>
+              <span class="st-nav-chevron"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+            </button>
+
+            <button class="st-nav-item" type="button" data-st-tab="referrals">
+              <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span class="st-nav-copy">
+                <span class="st-nav-line"><span class="st-nav-title">Referrals</span><span class="st-nav-pill">Credits</span></span>
+                <span class="st-nav-desc">Invite friends and earn credits</span>
+              </span>
+              <span class="st-nav-chevron"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></span>
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Sub-page content -->
+      <div class="st-content" id="st-content">
+        <button class="st-mobile-back" id="st-back-btn" type="button">
+          <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+          <span id="st-back-title">Settings</span>
+        </button>
+
+        <div class="st-panel active" id="panel-security">
+          <div class="st-card">
+            <div class="st-card-head"><span class="st-card-title">Security</span></div>
+            <div class="st-card-body">Conteúdo de segurança aqui — 2FA, senha, etc.</div>
+          </div>
+        </div>
+
+        <div class="st-panel" id="panel-sessions">
+          <div class="st-card">
+            <div class="st-card-head"><span class="st-card-title">Sessions</span></div>
+            <div class="st-card-body">Lista de sessões ativas.</div>
+          </div>
+        </div>
+
+        <div class="st-panel" id="panel-preferences">
+          <div class="st-card">
+            <div class="st-card-head"><span class="st-card-title">Preferences</span></div>
+            <div class="st-card-body">Idioma, fuso horário, formato de data.</div>
+          </div>
+        </div>
+
+        <div class="st-panel" id="panel-api-keys">
+          <div class="st-card">
+            <div class="st-card-head"><span class="st-card-title">API Keys</span></div>
+            <div class="st-card-body">Gerencie suas chaves de API.</div>
+          </div>
+        </div>
+
+        <div class="st-panel" id="panel-referrals">
+          <div class="st-card">
+            <div class="st-card-head"><span class="st-card-title">Referrals</span></div>
+            <div class="st-card-body">Indique amigos e ganhe créditos.</div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /.st-layout -->
+  </section>
+
+  <!-- Bottom dock -->
+  <div class="dock">
+    <button class="dock-item" type="button">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Overview
+    </button>
+    <button class="dock-item" type="button">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      Lookup
+    </button>
+    <button class="dock-item" type="button">
+      <svg viewBox="0 0 24 24"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg>
+      History
+    </button>
+    <button class="dock-item" type="button">
+      <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+      Billing
+    </button>
+    <button class="dock-item active" type="button">
+      <svg viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+      Settings
+    </button>
+  </div>
+</div><!-- /.phone -->
+<script>
+  var layout  = document.getElementById('st-layout');
+  var backBtn = document.getElementById('st-back-btn');
+  var backTitle = document.getElementById('st-back-title');
+  var panels  = document.querySelectorAll('.st-panel');
+
+  var labelMap = {
+    'security':    'Security',
+    'sessions':    'Sessions',
+    'preferences': 'Preferences',
+    'api-keys':    'API Keys',
+    'referrals':   'Referrals'
+  };
+
+  function openPanel(name) {
+    panels.forEach(function(p) { p.classList.remove('active'); });
+    var target = document.getElementById('panel-' + name);
+    if (target) target.classList.add('active');
+    if (backTitle) backTitle.textContent = labelMap[name] || name;
+    layout.classList.add('st-panel-open');
+  }
+
+  function closePanel() {
+    layout.classList.remove('st-panel-open');
+  }
+
+  document.querySelectorAll('[data-st-tab]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      openPanel(btn.getAttribute('data-st-tab'));
+    });
+  });
+
+  backBtn.addEventListener('click', closePanel);
+</script>
+</body>
+</html>
