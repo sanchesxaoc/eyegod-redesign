@@ -1,0 +1,1955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — eyegod.cc</title>
+  <meta name="description" content="Privacy Policy for the eyegod.cc OSINT platform — data collection, encryption, 30-day retention, security measures and your privacy rights." />
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="shortcut icon" type="image/png" href="/logo.png" />
+
+  <!-- Inter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/400.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/500.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/600.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/700.css" />
+  <!-- Montserrat -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5/400.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5/500.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5/600.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5/700.css" />
+  <!-- JetBrains Mono -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5/400.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5/500.css" />
+
+  <style>
+    /* ══════════════════════════════════════════════════════════
+       DESIGN TOKENS — inherited from the eyegod.cc landing page
+    ══════════════════════════════════════════════════════════ */
+    :root {
+      --bg:              #000000;
+      --bg-raise:        rgba(255,255,255,0.02);
+      --bg-raise-2:      rgba(255,255,255,0.04);
+      --bg-code:         #050505;
+
+      --text:            #f0f0f0;
+      --text-2:          #bbbbbb;
+      --text-3:          rgba(255,255,255,0.45);
+      --text-4:          rgba(255,255,255,0.28);
+
+      --accent:          #FFF5F5;
+      --accent-soft:     rgba(255,245,245,0.12);
+      --accent-line:     rgba(255,245,245,0.22);
+
+      --line:            rgba(255,255,255,0.06);
+      --line-2:          rgba(255,255,255,0.08);
+      --line-3:          rgba(255,255,255,0.14);
+
+      --ok:              #7ee2b8;
+      --ok-bg:           rgba(126,226,184,0.08);
+      --ok-line:         rgba(126,226,184,0.20);
+      --warn:            #f0c674;
+      --warn-bg:         rgba(240,198,116,0.08);
+      --warn-line:       rgba(240,198,116,0.20);
+      --danger:          #f4a0a0;
+      --danger-bg:       rgba(244,160,160,0.08);
+      --danger-line:     rgba(244,160,160,0.20);
+      --info:            #a8c7f0;
+      --info-bg:         rgba(168,199,240,0.08);
+      --info-line:       rgba(168,199,240,0.20);
+
+      --sans:  "Inter", ui-sans-serif, system-ui, sans-serif;
+      --head:  "Montserrat", ui-sans-serif, system-ui, sans-serif;
+      --mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+      --nav-h: 65px;
+      --r-sm: 6px;
+      --r-md: 8px;
+      --r-lg: 12px;
+      --r-xl: 20px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--nav-h) + 24px);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+    }
+
+    html { overflow-x: hidden; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      min-height: 100svh;
+      max-width: 100vw;
+    }
+
+    /* Long unbroken strings must never widen the page */
+    p, li, td, th, dd, dt, .card-desc, .co-body, .def-desc {
+      overflow-wrap: break-word;
+    }
+
+    ::selection { background: rgba(255,245,245,0.16); color: #fff; }
+
+    a { color: inherit; }
+
+    :focus-visible {
+      outline: 2px solid rgba(255,245,245,0.55);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    /* Scrollbar */
+    * { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.14) transparent; }
+    *::-webkit-scrollbar { width: 9px; height: 9px; }
+    *::-webkit-scrollbar-track { background: transparent; }
+    *::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.10);
+      border-radius: 999px;
+      border: 2px solid transparent;
+      background-clip: content-box;
+    }
+    *::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.20); background-clip: content-box; }
+
+    /* ── Liquid glass (from landing page) ── */
+    .liquid-glass {
+      background: rgba(255,255,255,0.02);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: none;
+      box-shadow: inset 0 1px 1px rgba(255,255,255,0.06);
+      position: relative;
+      overflow: hidden;
+    }
+    .liquid-glass::before {
+      content: "";
+      position: absolute; inset: 0;
+      border-radius: inherit;
+      padding: 1.4px;
+      background: linear-gradient(180deg,
+        rgba(255,255,255,0.20) 0%, rgba(255,255,255,0.06) 20%,
+        rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%,
+        rgba(255,255,255,0.06) 80%, rgba(255,255,255,0.20) 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    /* ── Silver→rosy gradient text (landing page signature) ── */
+    .grad {
+      background: linear-gradient(to right, #c0c0c0, #FFF5F5);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      z-index: 999;
+      background: #0a0a0a;
+      border: 1px solid var(--line-3);
+      border-radius: var(--r-md);
+      padding: 10px 16px;
+      font-size: 14px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .skip-link:focus { left: 16px; top: 12px; }
+
+    /* ══════════════════════════════════════════════════════════
+       NAVBAR — same structure/proportions as the landing page
+    ══════════════════════════════════════════════════════════ */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 300;
+      background: rgba(0,0,0,0.72);
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+    }
+    .nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+    @media (min-width: 768px) { .nav-row { padding: 14px 32px; } }
+
+    .nav-logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img {
+      height: 26px;
+      object-fit: contain;
+      display: block;
+      filter: brightness(0) invert(1);
+      transform: scale(2.4);
+      transform-origin: left center;
+    }
+    @media (min-width: 768px) { .nav-logo img { transform: scale(3.1); } }
+
+    .nav-center { display: none; align-items: center; gap: 2px; }
+    @media (min-width: 900px) { .nav-center { display: flex; } }
+
+    .nav-btn {
+      display: flex; align-items: center; gap: 5px;
+      border-radius: var(--r-sm);
+      padding: 8px 12px;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      color: #b0b0b0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 150ms;
+      white-space: nowrap;
+    }
+    .nav-btn:hover { color: #ffffff; }
+    .nav-btn.is-active { color: var(--accent); }
+    .nav-btn svg { opacity: .6; flex-shrink: 0; width: 14px; height: 14px; }
+
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+
+    .btn-signup {
+      display: none;
+      border-radius: 9999px;
+      padding: 8px 16px;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      color: #d0d0d0;
+      cursor: pointer;
+      transition: color 150ms, background 150ms, border-color 150ms;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      text-decoration: none !important;
+      white-space: nowrap;
+    }
+    @media (min-width: 768px) { .btn-signup { display: block; } }
+    .btn-signup:hover {
+      color: #ffffff;
+      background: rgba(255,255,255,0.06) !important;
+      border-color: rgba(255,255,255,0.08);
+    }
+
+    .btn-hamburger {
+      display: flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px;
+      border-radius: var(--r-sm);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: #b0b0b0;
+      transition: color 150ms;
+    }
+    @media (min-width: 900px) { .btn-hamburger { display: none; } }
+    .btn-hamburger:hover { color: #ffffff; }
+
+    .nav-divider {
+      height: 1px;
+      margin: 0 20px;
+      background: linear-gradient(to right, transparent, rgba(255,245,245,0.18), transparent);
+    }
+    @media (min-width: 768px) { .nav-divider { margin: 0 32px; } }
+
+    /* Mobile dropdown */
+    #mobile-menu {
+      display: none;
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      flex-direction: column;
+      padding: 12px 20px 24px;
+      gap: 4px;
+      /* The parent .site-nav already establishes a backdrop-filter containing
+         block, so a nested backdrop-filter only samples the 65px-tall nav and
+         never the page behind it. Use an opaque panel instead. */
+      background: #050505;
+      z-index: 200;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+    }
+    #mobile-menu.open { display: flex; animation: slideDown .3s ease-out; }
+    @keyframes slideDown { from { opacity:0; transform: translateY(-10px);} to {opacity:1; transform:translateY(0);} }
+    @media (min-width: 900px) { #mobile-menu { display: none !important; } }
+
+    .mobile-nav-btn {
+      display: flex; align-items: center; justify-content: flex-start;
+      width: 100%;
+      border-radius: var(--r-md);
+      padding: 13px 16px;
+      font-family: var(--sans);
+      font-size: 15px; font-weight: 500;
+      color: #e8e8e8;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.04);
+      cursor: pointer;
+      text-align: left;
+      text-decoration: none;
+      transition: background 150ms, color 150ms, border-color 150ms;
+    }
+    .mobile-nav-btn:hover {
+      color: #ffffff;
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.08);
+    }
+    .mobile-divider { height: 1px; margin: 6px 0 8px; background: rgba(255,255,255,0.06); }
+    .btn-signup-mobile {
+      border-radius: 9999px;
+      padding: 13px 16px;
+      font-family: var(--sans);
+      font-size: 15px; font-weight: 500;
+      color: #e8e8e8;
+      cursor: pointer;
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      transition: background 150ms, border-color 150ms, color 150ms;
+      text-align: center;
+      text-decoration: none !important;
+      margin-top: 4px;
+      display: block;
+    }
+    .btn-signup-mobile:hover {
+      color: #ffffff;
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       PAGE HEADER (hero) — glow blob + grid, landing-page flavour
+    ══════════════════════════════════════════════════════════ */
+    .page-hero {
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      padding: 40px 20px 36px;
+    }
+    @media (min-width: 768px) { .page-hero { padding: 48px 32px 44px; } }
+
+    .page-hero-grid {
+      position: absolute;
+      inset: -60px -20vw;
+      background-image:
+        linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 5%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 5%, transparent 70%);
+      pointer-events: none;
+    }
+    .page-hero-blob {
+      position: absolute;
+      top: -220px; left: 50%;
+      width: min(920px, 120vw); height: 460px;
+      transform: translateX(-50%);
+      background: radial-gradient(ellipse at center, rgba(255,245,245,0.09), transparent 62%);
+      filter: blur(46px);
+      pointer-events: none;
+    }
+    .page-hero-inner { position: relative; z-index: 2; max-width: 1180px; margin: 0 auto; }
+
+    .breadcrumb {
+      display: flex; align-items: center; gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .breadcrumb a { color: var(--text-4); text-decoration: none; transition: color 150ms; }
+    .breadcrumb a:hover { color: var(--text-2); }
+    .breadcrumb .sep { color: rgba(255,255,255,0.16); }
+    .breadcrumb .current { color: rgba(255,245,245,0.62); }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 5px 13px 5px 10px;
+      border: 1px solid var(--line-2);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.02);
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: rgba(255,245,245,0.55);
+      margin-bottom: 20px;
+    }
+    .eyebrow svg { width: 13px; height: 13px; opacity: .8; }
+
+    .page-title {
+      font-family: var(--head);
+      font-weight: 400;
+      font-size: clamp(34px, 6vw, 62px);
+      line-height: 1.03;
+      letter-spacing: -0.035em;
+      color: var(--text);
+      margin: 0;
+    }
+    .page-lede {
+      margin-top: 16px;
+      max-width: 640px;
+      color: var(--text-3);
+      font-size: clamp(15px, 2vw, 17px);
+      line-height: 1.7;
+    }
+
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      margin-top: 28px;
+    }
+    .meta-chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 13px;
+      border: 1px solid var(--line-2);
+      border-radius: var(--r-md);
+      background: rgba(255,255,255,0.02);
+      font-size: 12.5px;
+      color: var(--text-3);
+      text-decoration: none;
+      transition: border-color 150ms, color 150ms, background 150ms;
+    }
+    a.meta-chip:hover { color: var(--text); border-color: var(--line-3); background: rgba(255,255,255,0.04); }
+    .meta-chip svg { width: 14px; height: 14px; opacity: .7; flex-shrink: 0; }
+    .meta-chip code, .meta-chip .mono { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+
+    /* ══════════════════════════════════════════════════════════
+       CARD PRIMITIVE — identical to landing page "why" cards
+    ══════════════════════════════════════════════════════════ */
+    .card-outer {
+      position: relative;
+      height: 100%;
+      border-radius: var(--r-xl);
+      border: .75px solid rgba(255,255,255,0.08);
+      padding: .5rem;
+    }
+    @media (min-width: 768px) { .card-outer { border-radius: 1.5rem; padding: .75rem; } }
+    .card-inner {
+      position: relative;
+      display: flex; height: 100%;
+      flex-direction: column;
+      gap: 1.1rem;
+      overflow: hidden;
+      border-radius: var(--r-lg);
+      border: .75px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.02);
+      padding: 1.4rem;
+      box-shadow: 0 0 27px 0 rgba(45,45,45,0.30);
+    }
+    .icon-box {
+      width: fit-content;
+      border-radius: var(--r-md);
+      border: .75px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.05);
+      padding: .5rem;
+      line-height: 0;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .icon-box svg { width: 1rem; height: 1rem; }
+    .card-title {
+      font-family: var(--head);
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      text-wrap: balance;
+    }
+    .card-desc {
+      font-family: var(--sans);
+      font-size: .9rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* Glow-on-hover, ported from the landing page */
+    .glow-container {
+      pointer-events: none;
+      position: absolute; inset: 0;
+      border-radius: inherit;
+      opacity: 1;
+      transition: opacity .3s;
+      --blur: 0px; --spread: 40; --start: 0; --active: 0;
+      --glowingeffect-border-width: 2px;
+      --repeating-conic-gradient-times: 5;
+      --gradient:
+        radial-gradient(circle, #dd7bbb 10%, #dd7bbb00 20%),
+        radial-gradient(circle at 40% 40%, #d79f1e 5%, #d79f1e00 15%),
+        radial-gradient(circle at 60% 60%, #5a922c 10%, #5a922c00 20%),
+        radial-gradient(circle at 40% 60%, #4c7894 10%, #4c789400 20%),
+        repeating-conic-gradient(from 236.84deg at 50% 50%,
+          #dd7bbb 0%,
+          #d79f1e calc(25% / var(--repeating-conic-gradient-times)),
+          #5a922c calc(50% / var(--repeating-conic-gradient-times)),
+          #4c7894 calc(75% / var(--repeating-conic-gradient-times)),
+          #dd7bbb calc(100% / var(--repeating-conic-gradient-times)));
+    }
+    .glow { position: absolute; inset: 0; border-radius: inherit; }
+    .glow::after {
+      content: "";
+      position: absolute;
+      inset: calc(-1 * var(--glowingeffect-border-width));
+      border-radius: inherit;
+      border: var(--glowingeffect-border-width) solid transparent;
+      background: var(--gradient);
+      background-attachment: fixed;
+      opacity: var(--active);
+      transition: opacity .3s;
+      -webkit-mask-clip: padding-box, border-box; mask-clip: padding-box, border-box;
+      -webkit-mask-composite: source-in, xor; mask-composite: intersect;
+      -webkit-mask-image: linear-gradient(#0000, #0000),
+        conic-gradient(from calc((var(--start) - var(--spread)) * 1deg), #00000000 0deg, #fff, #00000000 calc(var(--spread) * 2deg));
+      mask-image: linear-gradient(#0000, #0000),
+        conic-gradient(from calc((var(--start) - var(--spread)) * 1deg), #00000000 0deg, #fff, #00000000 calc(var(--spread) * 2deg));
+    }
+
+    /* Corner crosses (from the pricing grid) */
+    .p-cross { position: absolute; width: 22px; height: 22px; z-index: 3; color: rgba(255,255,255,0.18); }
+    .p-cross::before, .p-cross::after { content: ""; position: absolute; background: currentColor; }
+    .p-cross::before { width: 2px; height: 22px; left: 10px; }
+    .p-cross::after  { width: 22px; height: 2px; top: 10px; }
+    .p-tl { left: -12px; top: -12px; }  .p-tr { right: -12px; top: -12px; }
+    .p-bl { left: -12px; bottom: -12px; } .p-br { right: -12px; bottom: -12px; }
+
+    /* ══════════════════════════════════════════════════════════
+       PROSE / CONTENT
+    ══════════════════════════════════════════════════════════ */
+    .prose p { color: var(--text-3); margin: 0 0 14px; }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose strong { color: var(--text-2); font-weight: 600; }
+    .prose a:not(.meta-chip):not(.btn) {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,245,245,0.22);
+      transition: border-color 150ms;
+    }
+    .prose a:not(.meta-chip):not(.btn):hover { border-bottom-color: var(--accent); }
+    .prose ul, .prose ol { margin: 0 0 16px; padding-left: 0; list-style: none; }
+    .prose ol { counter-reset: li; }
+    .prose ul li, .prose ol li {
+      position: relative;
+      color: var(--text-3);
+      padding-left: 24px;
+      margin-bottom: 9px;
+      line-height: 1.65;
+    }
+    .prose ul li::before {
+      content: "";
+      position: absolute; left: 6px; top: .72em;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: rgba(255,245,245,0.38);
+    }
+    .prose ol li { counter-increment: li; padding-left: 30px; }
+    .prose ol li::before {
+      content: counter(li);
+      position: absolute; left: 0; top: 1px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: rgba(255,245,245,0.5);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line-2);
+      border-radius: 5px;
+      width: 20px; height: 20px;
+      display: flex; align-items: center; justify-content: center;
+      line-height: 1;
+    }
+    .prose code:not(pre code) {
+      font-family: var(--mono);
+      font-size: .855em;
+      color: var(--accent);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1.5px 5px;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    /* Section shell */
+    .doc-section { scroll-margin-top: calc(var(--nav-h) + 28px); margin-bottom: 60px; }
+    .doc-section:last-child { margin-bottom: 0; }
+
+    .sec-head { margin-bottom: 22px; }
+    .sec-kicker {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 12px;
+    }
+    .sec-num {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: .08em;
+      color: rgba(255,245,245,0.6);
+      background: rgba(255,245,245,0.07);
+      border: 1px solid var(--accent-soft);
+      border-radius: 5px;
+      padding: 2.5px 8px;
+      flex-shrink: 0;
+    }
+    .sec-rule { flex: 1; height: 1px; background: linear-gradient(to right, var(--line-2), transparent); }
+
+    h2.sec-title {
+      font-family: var(--head);
+      font-size: clamp(23px, 3.4vw, 31px);
+      font-weight: 500;
+      letter-spacing: -0.035em;
+      line-height: 1.15;
+      color: var(--text);
+      margin: 0;
+    }
+    p.sec-sub { margin-top: 10px; color: var(--text-3); font-size: 15px; line-height: 1.7; max-width: 720px; }
+
+    h3.sub-title {
+      font-family: var(--head);
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin: 34px 0 12px;
+      display: flex; align-items: center; gap: 9px;
+      scroll-margin-top: calc(var(--nav-h) + 28px);
+    }
+    h3.sub-title .sub-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 400;
+      color: rgba(255,245,245,0.42);
+      flex-shrink: 0;
+    }
+    h4.mini-title {
+      font-family: var(--head);
+      font-size: 13.5px;
+      font-weight: 600;
+      letter-spacing: .02em;
+      color: var(--text-2);
+      margin: 24px 0 10px;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       TABLES
+    ══════════════════════════════════════════════════════════ */
+    .table-wrap {
+      border: 1px solid var(--line-2);
+      border-radius: var(--r-lg);
+      background: rgba(255,255,255,0.015);
+      overflow: hidden;
+      margin: 16px 0 20px;
+    }
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table.dt { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 520px; }
+    table.dt thead th {
+      text-align: left;
+      font-family: var(--head);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      color: var(--text-4);
+      background: rgba(255,255,255,0.025);
+      border-bottom: 1px solid var(--line-2);
+      padding: 11px 16px;
+      white-space: nowrap;
+    }
+    table.dt tbody td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
+      color: var(--text-3);
+      vertical-align: top;
+      line-height: 1.6;
+    }
+    table.dt tbody tr:last-child td { border-bottom: none; }
+    table.dt tbody tr { transition: background 130ms; }
+    table.dt tbody tr:hover { background: rgba(255,255,255,0.022); }
+    table.dt td code, table.dt th code {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1.5px 5px;
+      white-space: nowrap;
+    }
+    table.dt td strong { color: var(--text); font-weight: 600; }
+    .nowrap { white-space: nowrap; }
+    .td-key { color: var(--text) !important; font-weight: 500; }
+
+    /* ══════════════════════════════════════════════════════════
+       BADGES / PILLS
+    ══════════════════════════════════════════════════════════ */
+    .badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      padding: 2.5px 7px;
+      border-radius: 5px;
+      border: 1px solid var(--line-2);
+      background: rgba(255,255,255,0.045);
+      color: var(--text-3);
+      white-space: nowrap;
+      line-height: 1.5;
+    }
+    .badge-accent { color: var(--accent); background: rgba(255,245,245,0.08); border-color: var(--accent-soft); }
+    .badge-ok     { color: var(--ok);     background: var(--ok-bg);     border-color: var(--ok-line); }
+    .badge-warn   { color: var(--warn);   background: var(--warn-bg);   border-color: var(--warn-line); }
+    .badge-danger { color: var(--danger); background: var(--danger-bg); border-color: var(--danger-line); }
+    .badge-info   { color: var(--info);   background: var(--info-bg);   border-color: var(--info-line); }
+
+    .method {
+      display: inline-flex; align-items: center;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: .08em;
+      padding: 3px 8px;
+      border-radius: 5px;
+      border: 1px solid;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .m-get    { color: var(--ok);     background: var(--ok-bg);     border-color: var(--ok-line); }
+    .m-post   { color: var(--info);   background: var(--info-bg);   border-color: var(--info-line); }
+    .m-delete { color: var(--danger); background: var(--danger-bg); border-color: var(--danger-line); }
+
+    /* ══════════════════════════════════════════════════════════
+       CALLOUTS
+    ══════════════════════════════════════════════════════════ */
+    .callout {
+      display: flex; gap: 13px;
+      padding: 15px 17px;
+      border-radius: var(--r-lg);
+      border: 1px solid var(--line-2);
+      background: rgba(255,255,255,0.022);
+      margin: 18px 0;
+      font-size: 13.8px;
+      line-height: 1.68;
+      color: var(--text-3);
+    }
+    .callout > svg { width: 17px; height: 17px; flex-shrink: 0; margin-top: 2px; opacity: .9; }
+    .callout .co-body { flex: 1; min-width: 0; }
+    .callout .co-title {
+      display: block;
+      font-family: var(--head);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .01em;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+    .callout code {
+      font-family: var(--mono); font-size: 12px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--line);
+      border-radius: 4px; padding: 1px 5px;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    .callout p { margin: 0 0 8px; color: inherit; }
+    .callout p:last-child { margin-bottom: 0; }
+    .co-info   { border-color: var(--info-line);   background: var(--info-bg); }
+    .co-info   > svg, .co-info .co-title   { color: var(--info); }
+    .co-ok     { border-color: var(--ok-line);     background: var(--ok-bg); }
+    .co-ok     > svg, .co-ok .co-title     { color: var(--ok); }
+    .co-warn   { border-color: var(--warn-line);   background: var(--warn-bg); }
+    .co-warn   > svg, .co-warn .co-title   { color: var(--warn); }
+    .co-danger { border-color: var(--danger-line); background: var(--danger-bg); }
+    .co-danger > svg, .co-danger .co-title { color: var(--danger); }
+    .co-accent { border-color: var(--accent-soft); background: rgba(255,245,245,0.04); }
+    .co-accent > svg, .co-accent .co-title { color: var(--accent); }
+
+    /* ══════════════════════════════════════════════════════════
+       CODE BLOCKS
+    ══════════════════════════════════════════════════════════ */
+    .code-block {
+      border: 1px solid var(--line-2);
+      border-radius: var(--r-lg);
+      background: var(--bg-code);
+      overflow: hidden;
+      margin: 14px 0 20px;
+    }
+    .code-head {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px;
+      padding: 8px 8px 8px 14px;
+      background: rgba(255,255,255,0.025);
+      border-bottom: 1px solid var(--line-2);
+      min-height: 40px;
+    }
+    .code-lang {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--text-4);
+      display: flex; align-items: center; gap: 8px;
+      min-width: 0;
+    }
+    .code-lang .lang-note {
+      text-transform: none;
+      letter-spacing: 0;
+      color: rgba(255,255,255,0.34);
+      font-size: 11.5px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .code-tabs { display: flex; gap: 2px; flex-wrap: wrap; }
+    .code-tab {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .04em;
+      color: var(--text-4);
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 5px;
+      padding: 4px 9px;
+      cursor: pointer;
+      transition: color 140ms, background 140ms, border-color 140ms;
+      white-space: nowrap;
+    }
+    .code-tab:hover { color: var(--text-2); background: rgba(255,255,255,0.04); }
+    .code-tab.active {
+      color: var(--accent);
+      background: rgba(255,245,245,0.08);
+      border-color: var(--accent-soft);
+    }
+    .copy-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--sans);
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--text-4);
+      background: transparent;
+      border: 1px solid var(--line-2);
+      border-radius: var(--r-sm);
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: color 140ms, border-color 140ms, background 140ms;
+      flex-shrink: 0;
+    }
+    .copy-btn:hover { color: var(--text); border-color: var(--line-3); background: rgba(255,255,255,0.04); }
+    .copy-btn svg { width: 13px; height: 13px; }
+    .copy-btn.copied { color: var(--ok); border-color: var(--ok-line); background: var(--ok-bg); }
+
+    .code-block pre {
+      margin: 0;
+      padding: 15px 16px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .code-block code {
+      font-family: var(--mono);
+      font-size: 12.6px;
+      line-height: 1.72;
+      color: #d8d8d8;
+      white-space: pre;
+      display: block;
+      tab-size: 2;
+    }
+    .code-pane { display: none; }
+    .code-pane.active { display: block; }
+
+    /* Syntax tokens — monochrome + rosy accent, matches the brand */
+    .tok-com { color: #5c5c5c; font-style: italic; }
+    .tok-str { color: #cbb8b8; }
+    .tok-num { color: #e8dada; }
+    .tok-key { color: #FFF5F5; font-weight: 500; }
+    .tok-fn  { color: #dcdcdc; }
+    .tok-var { color: #9fb4c9; }
+    .tok-pun { color: #6f6f6f; }
+    .tok-prop{ color: #a8c7f0; }
+    .tok-bool{ color: #f0c674; }
+    .tok-flag{ color: #8f8f8f; }
+
+    /* Endpoint pill */
+    .endpoint {
+      display: flex; align-items: center; gap: 11px;
+      flex-wrap: wrap;
+      padding: 12px 15px;
+      border: 1px solid var(--line-2);
+      border-radius: var(--r-md);
+      background: rgba(255,255,255,0.025);
+      margin: 16px 0 14px;
+    }
+    .endpoint .path {
+      font-family: var(--mono);
+      font-size: 13.5px;
+      color: var(--text);
+      word-break: break-all;
+    }
+    .endpoint .path .seg-var { color: var(--accent); }
+    .endpoint .ep-note {
+      font-size: 12.5px;
+      color: var(--text-4);
+      margin-left: auto;
+      white-space: nowrap;
+    }
+    @media (max-width: 600px) { .endpoint .ep-note { margin-left: 0; width: 100%; } }
+
+    /* ══════════════════════════════════════════════════════════
+       FOOTER — copied from the landing page
+    ══════════════════════════════════════════════════════════ */
+    #site-footer {
+      background: #000;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 64px 20px 0;
+      color: #f0f0f0;
+      margin-top: 96px;
+    }
+    @media (min-width: 768px) { #site-footer { padding: 72px 32px 0; } }
+    .footer-inner { max-width: 1180px; margin: 0 auto; }
+    .footer-top {
+      display: grid; grid-template-columns: 1fr; gap: 44px;
+      padding-bottom: 52px;
+    }
+    @media (min-width: 768px) { .footer-top { grid-template-columns: 2fr repeat(3, 1fr); gap: 32px; } }
+    .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .footer-logo img {
+      height: 22px;
+      filter: brightness(0) invert(1);
+      transform: scale(2.2);
+      transform-origin: left center;
+      display: block;
+    }
+    .footer-tagline {
+      font-family: var(--sans);
+      font-size: 13.5px; line-height: 1.65;
+      color: rgba(255,255,255,0.38);
+      max-width: 240px;
+      margin: 0 0 24px;
+    }
+    .footer-socials { display: flex; gap: 10px; }
+    .footer-social-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px;
+      border-radius: var(--r-md);
+      border: 1px solid rgba(255,255,255,0.08);
+      background: transparent;
+      color: rgba(255,255,255,0.45);
+      cursor: pointer;
+      transition: color 150ms, border-color 150ms, background 150ms;
+      text-decoration: none;
+    }
+    .footer-social-btn:hover {
+      color: #f0f0f0;
+      border-color: rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.04);
+    }
+    .footer-social-btn svg { width: 16px; height: 16px; stroke-width: 1.75; }
+    .footer-col-title {
+      font-family: var(--head);
+      font-size: 12px; font-weight: 600;
+      letter-spacing: .07em; text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+      margin: 0 0 16px;
+    }
+    .footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 11px; }
+    .footer-col ul li a {
+      font-family: var(--sans);
+      font-size: 14px;
+      color: rgba(255,255,255,0.48);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+      transition: color 150ms;
+    }
+    .footer-col ul li a:hover { color: #f0f0f0; }
+    .footer-col ul li a svg { width: 13px; height: 13px; flex-shrink: 0; opacity: .55; stroke-width: 2; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 24px 0;
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+      text-align: center;
+    }
+    @media (min-width: 640px) { .footer-bottom { flex-direction: row; justify-content: space-between; text-align: left; } }
+    .footer-copyright { font-family: var(--sans); font-size: 13px; color: rgba(255,255,255,0.22); }
+
+    /* Back to top */
+    #to-top {
+      position: fixed;
+      right: 20px; bottom: 20px;
+      z-index: 250;
+      width: 42px; height: 42px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      border: 1px solid var(--line-2);
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: var(--text-3);
+      cursor: pointer;
+      opacity: 0; visibility: hidden;
+      transform: translateY(8px);
+      transition: opacity 220ms, transform 220ms, visibility 220ms, color 150ms, border-color 150ms;
+    }
+    #to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+    #to-top:hover { color: var(--accent); border-color: var(--accent-line); }
+    #to-top svg { width: 17px; height: 17px; }
+
+    .legal-shell {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 0 20px;
+      align-items: start;
+    }
+    @media (min-width: 1040px) {
+      .legal-shell { grid-template-columns: minmax(0,1fr) 232px; gap: 56px; padding: 0 32px; }
+    }
+
+    .legal-main { min-width: 0; padding: 24px 0 0; max-width: 780px; }
+    @media (min-width: 1040px) { .legal-main { padding: 28px 0 0; } }
+
+    /* Summary card */
+    .legal-summary {
+      position: relative;
+      border: 1px solid var(--line-2);
+      border-radius: var(--r-xl);
+      background: rgba(255,255,255,0.02);
+      padding: 22px 24px;
+      margin-bottom: 44px;
+    }
+    .legal-summary h2 {
+      display: flex; align-items: center; gap: 9px;
+      font-family: var(--head);
+      font-size: 13px; font-weight: 600;
+      letter-spacing: .07em; text-transform: uppercase;
+      color: rgba(255,255,255,0.32);
+      margin: 0 0 15px;
+    }
+    .legal-summary h2 svg { width: 15px; height: 15px; color: var(--accent); opacity: .8; }
+    .summary-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 11px; }
+    @media (min-width: 720px) { .summary-list { grid-template-columns: repeat(2, 1fr); gap: 11px 24px; } }
+    .summary-list li {
+      display: flex; align-items: flex-start; gap: 9px;
+      font-size: 13.6px;
+      line-height: 1.6;
+      color: var(--text-3);
+    }
+    .summary-list li svg {
+      width: 15px; height: 15px;
+      flex-shrink: 0;
+      margin-top: 3px;
+      color: var(--accent);
+      opacity: .75;
+    }
+    .summary-list li strong { color: var(--text-2); font-weight: 600; }
+
+    /* Right-hand contents */
+    .legal-toc { display: none; }
+    @media (min-width: 1040px) { .legal-toc { display: block; } }
+    .legal-toc-inner {
+      position: sticky;
+      top: calc(var(--nav-h) + 20px);
+      max-height: calc(100svh - var(--nav-h) - 40px);
+      overflow-y: auto;
+      padding: 58px 0 40px;
+    }
+    .legal-toc-title {
+      font-family: var(--head);
+      font-size: 10.5px; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.24);
+      margin: 0 0 12px;
+    }
+    .legal-toc ul { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line-2); }
+    .legal-toc li a {
+      display: flex; align-items: baseline; gap: 9px;
+      padding: 6px 0 6px 14px;
+      margin-left: -1px;
+      border-left: 1px solid transparent;
+      font-size: 12.8px;
+      line-height: 1.45;
+      color: rgba(255,255,255,0.38);
+      text-decoration: none;
+      transition: color 150ms, border-color 150ms;
+    }
+    .legal-toc li a:hover { color: var(--text-2); }
+    .legal-toc li a.active { color: var(--accent); border-left-color: var(--accent); }
+    .legal-toc li a .n {
+      font-family: var(--mono);
+      font-size: 10px;
+      opacity: .55;
+      flex-shrink: 0;
+      min-width: 15px;
+    }
+
+    /* Mobile contents */
+    .legal-jump { display: block; margin-bottom: 34px; }
+    @media (min-width: 1040px) { .legal-jump { display: none; } }
+    .legal-jump select {
+      width: 100%;
+      appearance: none; -webkit-appearance: none;
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--text);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line-2);
+      border-radius: var(--r-md);
+      padding: 11px 36px 11px 13px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 15px;
+    }
+    .legal-jump select:focus { outline: none; border-color: var(--accent-line); }
+    .legal-jump option { background: #0a0a0a; color: var(--text); }
+
+    /* Definition-style rows */
+    .def-list { display: grid; gap: 0; margin: 16px 0 20px; border: 1px solid var(--line-2); border-radius: var(--r-lg); overflow: hidden; }
+    .def-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3px 20px;
+      padding: 14px 17px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,0.015);
+    }
+    @media (min-width: 640px) { .def-row { grid-template-columns: 178px minmax(0,1fr); gap: 0 20px; } }
+    .def-row:last-child { border-bottom: none; }
+    .def-term {
+      font-family: var(--head);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.005em;
+    }
+    .def-desc { font-size: 13.8px; line-height: 1.68; color: var(--text-3); }
+    .def-desc code {
+      font-family: var(--mono); font-size: 12.3px; color: var(--accent);
+      background: rgba(255,255,255,0.05); border: 1px solid var(--line);
+      border-radius: 4px; padding: 1px 5px;
+    }
+
+    /* Contact cards */
+    .legal-contact { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 20px; }
+    @media (min-width: 640px) { .legal-contact { grid-template-columns: repeat(2, 1fr); } }
+    .contact-card {
+      display: flex; align-items: flex-start; gap: 14px;
+      border: 1px solid var(--line-2);
+      border-radius: var(--r-lg);
+      background: rgba(255,255,255,0.02);
+      padding: 19px;
+      text-decoration: none;
+      transition: border-color 160ms, background 160ms, transform 160ms;
+    }
+    .contact-card:hover { border-color: var(--accent-line); background: rgba(255,245,245,0.035); transform: translateY(-2px); }
+    .contact-name { font-family: var(--head); font-size: 14.5px; font-weight: 600; color: var(--text); }
+    .contact-val { font-family: var(--mono); font-size: 12.6px; color: var(--accent); margin-top: 4px; word-break: break-all; }
+
+    /* Footer note */
+    .legal-endnote {
+      margin-top: 52px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      display: flex; flex-wrap: wrap; gap: 12px;
+      align-items: center; justify-content: flex-start;
+      font-size: 12.5px;
+      color: var(--text-4);
+    }
+    .legal-endnote a { color: var(--text-3); text-decoration: none; transition: color 150ms; }
+    .legal-endnote a:hover { color: var(--accent); }
+
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ══ NAVBAR ══ -->
+  <nav class="site-nav">
+    <div class="nav-row">
+      <a class="nav-logo" href="index.html" aria-label="EyeGod — home">
+        <img src="/logo.png" alt="EyeGod" />
+      </a>
+
+      <div class="nav-center">
+          <a class="nav-btn" href="index.html#why-section">Features</a>
+          <a class="nav-btn" href="index.html#pricing-section">Pricing</a>
+          <a class="nav-btn" href="docs.html">Docs</a>
+          <a class="nav-btn" href="faq.html">FAQ</a>
+      </div>
+
+      <div class="nav-right">
+        <a href="login.html" class="btn-signup">Sign Up</a>
+        <button class="btn-hamburger" id="hamburger-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+          <svg id="icon-menu" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          <svg id="icon-x" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="nav-divider"></div>
+
+    <div id="mobile-menu">
+          <a class="mobile-nav-btn" href="index.html#why-section">Features</a>
+          <a class="mobile-nav-btn" href="index.html#pricing-section">Pricing</a>
+          <a class="mobile-nav-btn" href="docs.html">Docs</a>
+          <a class="mobile-nav-btn" href="faq.html">FAQ</a>
+      <div class="mobile-divider"></div>
+      <a href="login.html" class="btn-signup-mobile">Sign Up</a>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="page-hero-grid"></div>
+    <div class="page-hero-blob"></div>
+    <div class="page-hero-inner">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="sep">/</span>
+        <span>Legal</span>
+        <span class="sep">/</span>
+        <span class="current">Privacy Policy</span>
+      </div>
+      <span class="eyebrow"><i data-lucide="lock"></i>Legal</span>
+      <h1 class="page-title">Privacy <span class="grad">Policy</span></h1>
+      <p class="page-lede">What we collect, why we collect it, how long we keep it, and the rights you have over it — written to be read, not skimmed past.</p>
+      <div class="hero-meta">
+        <span class="meta-chip"><i data-lucide="calendar"></i>Effective January 1, 2026</span>
+        <a class="meta-chip" href="terms.html"><i data-lucide="file-text"></i>Terms of Service</a>
+        <a class="meta-chip" href="privacy.html"><i data-lucide="lock"></i>Privacy Policy</a>
+        <a class="meta-chip" href="faq.html"><i data-lucide="circle-help"></i>FAQ</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="legal-shell">
+    <main class="legal-main" id="main">
+
+      <div class="legal-jump">
+        <select id="legal-jump" aria-label="Jump to section">
+          <option value="" disabled selected>Jump to a section…</option>
+          <option value="intro">— · Introduction</option><option value="collect">01 · Information we collect</option><option value="use">02 · How we use your information</option><option value="sharing">03 · Data sharing &amp; disclosure</option><option value="cookies">04 · Cookies &amp; tracking</option><option value="retention">05 · Data retention</option><option value="security">06 · Data security</option><option value="rights">07 · Your privacy rights</option><option value="transfers">08 · International transfers</option><option value="third-party">09 · Third-party services</option><option value="children">10 · Children's privacy</option><option value="changes">11 · Changes to this policy</option><option value="contact">12 · Contact us</option>
+        </select>
+      </div>
+
+      <div class="legal-summary">
+        <span class="p-cross p-tl"></span><span class="p-cross p-tr"></span>
+        <span class="p-cross p-bl"></span><span class="p-cross p-br"></span>
+        <h2><i data-lucide="scan-text"></i>In short</h2>
+        <ul class="summary-list"><li><i data-lucide="ban"></i><span><strong>We never sell your data.</strong> Not to advertisers, not to brokers, not to anyone.</span></li><li><i data-lucide="eye-off"></i><span><strong>Queries are encrypted.</strong> We cannot read the content of your searches.</span></li><li><i data-lucide="timer"></i><span><strong>30-day deletion.</strong> Search data is destroyed automatically and permanently.</span></li><li><i data-lucide="shield-check"></i><span><strong>TLS 1.3 in transit</strong>, encryption at rest, bcrypt for every password.</span></li><li><i data-lucide="user-check"></i><span><strong>You control your data.</strong> Access, correct, export or delete it on request.</span></li><li><i data-lucide="baby"></i><span><strong>Adults only.</strong> The platform is not directed to anyone under 18.</span></li></ul>
+      </div>
+
+      <section class="doc-section" id="intro">
+  <div class="sec-head">
+    <div class="sec-kicker"><span class="sec-num">—</span><span class="sec-rule"></span></div>
+    <h2 class="sec-title">Introduction</h2>
+  </div>
+  <div class="prose">
+      <p>
+        At eyegod.cc we are committed to protecting your personal information and your right to
+        privacy. This Privacy Policy explains what information we collect, why we collect it,
+        how we use and protect it, and what rights you have over it.
+      </p>
+      <p>
+        This policy covers the eyegod.cc website, the dashboard and the public API. It does not
+        cover the content of the third-party datasets accessible through the Service, which
+        originate outside our control. By using the platform you agree to the practices described here.
+      </p>
+    </div>
+</section>
+
+<section class="doc-section" id="collect">
+  <div class="sec-head">
+    <div class="sec-kicker"><span class="sec-num">01</span><span class="sec-rule"></span></div>
+    <h2 class="sec-title">Information we collect</h2>
+  </div>
+  <div class="prose">
+      <p>
+        We collect information you provide directly, information gathered automatically as you
+        use the Service, and — in limited cases — information from third-party providers such
+        as our payment processors.
+      </p>
+      <h3 class="sub-title" id="collect-provided"><span class="sub-num">1.1</span>Information you provide</h3><div class="prose"><div class="def-list"><div class="def-row"><div class="def-term">Account data</div><div class="def-desc">Email address, username and a hashed password when you register.</div></div><div class="def-row"><div class="def-term">Payment data</div><div class="def-desc">Billing details processed by our payment providers. Full card numbers are never stored on our servers.</div></div><div class="def-row"><div class="def-term">Communications</div><div class="def-desc">Messages, feedback and support requests you send us, including any attachments.</div></div><div class="def-row"><div class="def-term">API credentials</div><div class="def-desc">API keys generated for your account, stored in encrypted form.</div></div></div></div>
+      <h3 class="sub-title" id="collect-auto"><span class="sub-num">1.2</span>Information collected automatically</h3><div class="prose"><div class="def-list"><div class="def-row"><div class="def-term">Usage data</div><div class="def-desc">Pages visited, features used and interaction patterns within the dashboard.</div></div><div class="def-row"><div class="def-term">Device data</div><div class="def-desc">IP address, browser type, operating system, device identifiers and time zone.</div></div><div class="def-row"><div class="def-term">Log data</div><div class="def-desc">Server logs including access timestamps, request paths, status codes and error reports.</div></div><div class="def-row"><div class="def-term">Cookies</div><div class="def-desc">Session and persistent cookies used to maintain authentication and remember preferences.</div></div></div></div>
+      <h3 class="sub-title" id="collect-queries"><span class="sub-num">1.3</span>A note on your search queries</h3><div class="prose">
+        <p>
+          Search queries occupy a special category. They are encrypted end-to-end using asymmetric
+          encryption, which means <strong>we cannot read their content</strong>. What we can see is
+          operational metadata — that a query occurred, its type, its timestamp and whether it
+          consumed a credit — which is what makes billing and abuse prevention possible.
+        </p>
+        <div class="callout co-ok"><i data-lucide="eye-off"></i><div class="co-body"><span class="co-title">Metadata, not content</span>We know <em>that</em> you ran an email lookup at 14:32 and that it cost one credit. We do not know <em>which</em> email address you looked up. All of it is deleted after 30 days regardless.</div></div>
+      </div>
+      <h3 class="sub-title" id="collect-not"><span class="sub-num">1.4</span>Information we do not collect</h3><div class="prose">
+        <p>
+          We do not collect sensitive personal information such as government identity documents,
+          biometric data, precise geolocation or health information about our users. We do not
+          purchase user profiles from data brokers, and we do not build advertising profiles.
+        </p>
+      </div>
+    </div>
+</section>
+
+<section class="doc-section" id="use">
+  <div class="sec-head">
+    <div class="sec-kicker"><span class="sec-num">02</span><span class="sec-rule"></span></div>
+    <h2 class="sec-title">How we use your information</h2>
+  </div>
+  <div class="prose">
+      <h3 class="sub-title" id="use-service"><span class="sub-num">2.1</span>Providing and improving the Service</h3><div class="prose">
+        <ul>
+          <li>Creating and managing your account, and authenticating your access.</li>
+          <li>Processing payments and administering subscriptions and credit allowances.</li>
+          <li>Delivering search results and executing intelligence queries.</li>
+          <li>Diagnosing technical faults and improving platform performance and reliability.</li>
+          <li>Developing new features and refining the user experience.</li>
+        </ul>
+      </div>
+      <h3 class="sub-title" id="use-comms"><span class="sub-num">2.2</span>Communication</h3><div class="prose">
+        <ul>
+          <li>Sending transactional email such as account confirmations, password resets and receipts.</li>
+          <li>Notifying you about service changes, policy updates and security alerts.</li>
+          <li>Responding to your inquiries and support requests.</li>
+        </ul>
+      </div>
+      <h3 class="sub-title" id="use-security"><span class="sub-num">2.3</span>Security and compliance</h3><div class="prose">
+        <ul>
+          <li>Detecting, preventing and investigating fraud, abuse and unauthorized access.</li>
+          <li>Enforcing our <a href="terms.html">Terms of Service</a> and related usage policies.</li>
+          <li>Monitoring for suspicious activity, credential sharing and rate-limit circumvention.</li>
+          <li>Complying with applicable laws and responding to valid legal process.</li>
+        </ul>
+      </div>
+      <h3 class="sub-title" id="use-basis"><span class="sub-num">2.4</span>Legal bases for processing</h3><div class="prose"><div class="table-wrap"><div class="table-scroll"><table class="dt"><thead><tr><th style="width:340px">Purpose</th><th>Legal basis</th></tr></thead><tbody><tr><td>Providing the Service you subscribed to</td><td>Performance of a contract</td></tr><tr><td>Processing payments and issuing receipts</td><td>Performance of a contract / legal obligation</td></tr><tr><td>Security monitoring and abuse prevention</td><td>Legitimate interests</td></tr><tr><td>Product improvement and analytics</td><td>Legitimate interests</td></tr><tr><td>Transactional email</td><td>Performance of a contract</td></tr><tr><td>Marketing email</td><td>Consent — withdrawable at any time</td></tr><tr><td>Financial record retention</td><td>Legal obligation</td></tr></tbody></table></div></div></div>
+      <div class="callout co-accent"><i data-lucide="ban"></i><div class="co-body"><span class="co-title">We do not sell your personal data</span>We will never sell, rent or trade your personal information to third parties for their marketing purposes. There is no version of our business model that involves doing so.</div></div>
+    </div>
+</section>
+
+<section class="doc-section" id="sharing">
+  <div class="sec-head">
+    <div class="sec-kicker"><span class="sec-num">03</span><span class="sec-rule"></span></div>
+    <h2 class="sec-title">Data sharing &amp; disclosure</h2>
+  </div>
+  <div class="prose">
+      <p>We share information only in the limited circumstances described below.</p>
+      <h3 class="sub-title" id="sharing-providers"><span class="sub-num">3.1</span>Service providers</h3><div class="prose">
+        <p>
+          We work with vendors that perform services on our behalf — payment processing, email
+          delivery, cloud hosting and analytics. They are contractually bound to handle your data
+          securely, to use it only for the purposes we specify, and to delete it when the
+          relationship ends.
+        </p>
+      </div>
+      <h3 class="sub-title" id="sharing-legal"><span class="sub-num">3.2</span>Legal requirements</h3><div class="prose">
+        <p>
+          We may disclose information where required by law, or where we hold a good-faith belief
+          that disclosure is necessary to comply with a legal obligation, to protect our rights or
+          property, to prevent fraud or abuse, or to protect the personal safety of users or the public.
+        </p>
+        <div class="callout co-info"><i data-lucide="gavel"></i><div class="co-body"><span class="co-title">What we can actually produce</span>Because search queries are end-to-end encrypted and deleted after 30 days, there is a hard limit on what any legal request can recover. We cannot produce the content of queries we are technically unable to read, nor data that has already been destroyed.</div></div>
+      </div>
+      <h3 class="sub-title" id="sharing-transfers"><span class="sub-num">3.3</span>Business transfers</h3><div class="prose">
+        <p>
+          In the event of a merger, acquisition or sale of assets, your information may be
+          transferred as part of that transaction. We will notify you by email or through a
+          prominent notice on the platform before your information becomes subject to a
+          different privacy policy.
+        </p>
+      </div>
+      <h3 class="sub-title" id="sharing-aggregate"><span class="sub-num">3.4</span>Aggregate and anonymized data</h3><div class="prose">
+        <p>
+          We may publish aggregated or de-identified data that cannot reasonably be used to
+          identify you — for example, overall platform usage statistics or breach coverage metrics.
+        </p>
+      </div>
+    </div>
+</section>
+
+<section class="doc-section" id="cookies">
+  <div class="sec-head">
+    <div class="sec-kicker"><span class="sec-num">04</span><span class="sec-rule"></span></div>
+    <h2 class="sec-title">Cookies &amp; tracking</h2>
+  </div>
+  <div class="prose">
+      <p>
+        We use cookies and similar technologies to maintain your session, remember your
+        preferences and understand how the platform is used.
+      </p>
+      <div class="table-wrap"><div class="table-scroll"><table class="dt"><thead><tr><th style="width:130px">Category</th><th>Purpose</th><th style="width:150px">Can you disable it?</th></tr></thead><tbody><tr><td><strong>Essential</strong></td><td>Authentication, session management and security. The platform cannot function without them.</td><td><span class="badge badge-danger">No</span></td></tr><tr><td><strong>Preference</strong></td><td>Remembering interface settings and choices between visits.</td><td><span class="badge badge-ok">Yes</span></td></tr><tr><td><strong>Analytics</strong></td><td>Understanding navigation patterns so we can improve the experience.</td><td><span class="badge badge-ok">Yes</span></td></tr></tbody></table></div></div>
+      <h3 class="sub-title" id="cookies-manage"><span class="sub-num">4.1</span>Managing cookies</h3><div class="prose">
+        <p>
+          You can control or disable non-essential cookies through your browser settings.
+          Disabling essential cookies will prevent you from staying logged in and will break
+          core functionality. We do not use third-party advertising cookies or cross-site
+          tracking pixels.
+        </p>
+      </div>
+    </div>
+</section>
+
+<section class="doc-section" id="retention">
+  <div class="sec-head">
+    <div class="sec-kicker"><span class="sec-num">05</span><span class="sec-rule"></span></div>
+    <h2 class="sec-title">Data retention</h2>
+  </div>
+  <div class="prose">
+      <p>
+        We retain personal information for as long as your account is active or as needed to
+        provide the Service. If you request deletion, we delete or anonymize your personal data
+        within 30 days, except where retention is required by law or by a legitimate business
+        need such as resolving a dispute.
+      </p>
+      <div class="table-wrap"><div class="table-scroll"><table class="dt"><thead><tr><th style="width:225px">Data category</th><th style="width:215px">Retention period</th><th>Reason</th></tr></thead><tbody><tr><td><strong>Search data &amp; results</strong></td><td><span class="badge badge-accent">30 days — automatic</span></td><td>Permanently deleted with no recovery path, by design.</td></tr><tr><td><strong>Account data</strong></td><td>Life of the account + 30 days</td><td>Allows recovery from accidental deletion.</td></tr><tr><td><strong>Payment records</strong></td><td>7 years</td><td>Required by financial and tax regulations.</td></tr><tr><td><strong>Usage &amp; server logs</strong></td><td>Up to 90 days</td><td>Security monitoring and abuse prevention.</td></tr><tr><td><strong>Support communications</strong></td><td>2 years after resolution</td><td>Context for follow-up and dispute resolution.</td></tr><tr><td><strong>API keys</strong></td><td>Until revoked or the account closes</td><td>Required to authenticate your requests.</td></tr></tbody></table></div></div>
+      <div class="callout co-warn"><i data-lucide="timer"></i><div class="co-body"><span class="co-title">The 30-day window is absolute</span>Search data deletion is automatic, permanent and irreversible. Export anything you need for your records before the window closes — we cannot restore it afterwards, even at your own request.</div></div>
+    </div>
+</section>
+
+<section class="doc-section" id="security">
+  <div class="sec-head">
+    <div class="sec-kicker"><span class="sec-num">06</span><span class="sec-rule"></span></div>
+    <h2 class="sec-title">Data security</h2>
+  </div>
+  <div class="prose">
+      <p>
+        We implement industry-standard technical and organizational measures to protect personal
+        information against unauthorized access, loss, destruction and alteration.
+      </p>
+      <div class="def-list"><div class="def-row"><div class="def-term">Transport encryption</div><div class="def-desc">TLS 1.3 for all traffic between your browser or client and our servers.</div></div><div class="def-row"><div class="def-term">Encryption at rest</div><div class="def-desc">Sensitive fields are encrypted at rest. Passwords are hashed with bcrypt and never stored in recoverable form.</div></div><div class="def-row"><div class="def-term">End-to-end query encryption</div><div class="def-desc">Asymmetric encryption applied to searches and results, so query content is unreadable to us.</div></div><div class="def-row"><div class="def-term">Access control</div><div class="def-desc">Role-based controls restrict which internal personnel can reach any user data, on a least-privilege basis.</div></div><div class="def-row"><div class="def-term">Auditing</div><div class="def-desc">Regular security reviews and vulnerability assessments across our infrastructure.</div></div><div class="def-row"><div class="def-term">Anomaly detection</div><div class="def-desc">Automated monitoring for unusual login patterns, credential sharing and API abuse.</div></div></div>
+      <div class="callout co-warn"><i data-lucide="shield-alert"></i><div class="co-body"><span class="co-title">No system is perfect</span>We take every reasonable precaution, but no security system is impenetrable. In the event of a breach affecting your personal information, we will notify you in accordance with applicable law and publish details of the impact and our response.</div></div>
+      <h3 class="sub-title" id="security-you"><span class="sub-num">6.1</span>What you can do</h3><div class="prose">
+        <ul>
+          <li>Use a unique, high-entropy password that you do not reuse anywhere else.</li>
+          <li>Store API keys in a secret manager or environment variable — never in source control.</li>
+          <li>Issue a separate API key per service so a single leak has a limited blast radius.</li>
+          <li>Revoke keys you no longer use, and rotate the rest on a schedule.</li>
+          <li>Report anything suspicious to <a href="mailto:support@eyegod.cc">support@eyegod.cc</a> immediately.</li>
+        </ul>
+      </div>
+    </div>
+</section>
+
+<section class="doc-section" id="rights">
+  <div class="sec-head">
+    <div class="sec-kicker"><span class="sec-num">07</span><span class="sec-rule"></span></div>
+    <h2 class="sec-title">Your privacy rights</h2>
+  </div>
+  <div class="prose">
+      <p>
+        Depending on where you live, you may have some or all of the following rights over your
+        personal information. We honour these requests regardless of your location, subject to
+        legal retention requirements.
+      </p>
+      <div class="table-wrap"><div class="table-scroll"><table class="dt"><thead><tr><th style="width:185px">Right</th><th>What it means</th></tr></thead><tbody><tr><td><strong>Access</strong></td><td>Request a copy of the personal data we hold about you.</td></tr><tr><td><strong>Correction</strong></td><td>Ask us to fix inaccurate or incomplete information.</td></tr><tr><td><strong>Deletion</strong></td><td>Request erasure of your personal data, subject to legal retention rules.</td></tr><tr><td><strong>Portability</strong></td><td>Receive your data in a structured, machine-readable format.</td></tr><tr><td><strong>Objection</strong></td><td>Object to processing based on our legitimate interests.</td></tr><tr><td><strong>Restriction</strong></td><td>Ask us to limit how we process your data in specific circumstances.</td></tr><tr><td><strong>Withdraw consent</strong></td><td>Withdraw consent at any time where processing relies on it.</td></tr></tbody></table></div></div>
+      <h3 class="sub-title" id="rights-exercise"><span class="sub-num">7.1</span>How to exercise your rights</h3><div class="prose">
+        <p>
+          Email <a href="mailto:support@eyegod.cc">support@eyegod.cc</a> from the address
+          registered to your account, describing which right you wish to exercise. We respond
+          within <strong>30 days</strong>. We may need to verify your identity before acting on a
+          request, which protects you against someone impersonating you to obtain your data.
+        </p>
+      </div>
+      <h3 class="sub-title" id="rights-marketing"><span class="sub-num">7.2</span>Opting out of marketing</h3><div class="prose">
+        <p>
+          You can opt out of marketing email at any time using the unsubscribe link in any message
+          we send, or by contacting us directly. You cannot opt out of transactional email —
+          password resets, security alerts and billing notices — because they are necessary to
+          operate your account.
+        </p>
+      </div>
+      <h3 class="sub-title" id="rights-complain"><span class="sub-num">7.3</span>Lodging a complaint</h3><div class="prose">
+        <p>
+          If you believe we have mishandled your personal data, we would like the chance to put it
+          right — contact us first. You also have the right to lodge a complaint with your local
+          data protection authority.
+        </p>
+      </div>
+    </div>
+</section>
+
+<section class="doc-section" id="transfers">
+  <div class="sec-head">
+    <div class="sec-kicker"><span class="sec-num">08</span><span class="sec-rule"></span></div>
+    <h2 class="sec-title">International transfers</h2>
+  </div>
+  <div class="prose">
+      <p>
+        We operate globally, which means your information may be processed in countries other than
+        the one you live in. Those countries may have different data protection laws from your own.
+      </p>
+      <p>
+        Wherever data is processed, we apply the same technical and organizational safeguards
+        described in this policy, and we use appropriate transfer mechanisms — such as standard
+        contractual clauses — where the law requires them.
+      </p>
+    </div>
+</section>
+
+<section class="doc-section" id="third-party">
+  <div class="sec-head">
+    <div class="sec-kicker"><span class="sec-num">09</span><span class="sec-rule"></span></div>
+    <h2 class="sec-title">Third-party services</h2>
+  </div>
+  <div class="prose">
+      <p>
+        The platform may contain links to third-party websites, integrations or services. This
+        Privacy Policy applies only to eyegod.cc. We are not responsible for the privacy practices
+        of third-party sites, and we encourage you to review their policies before interacting with them.
+      </p>
+      <p>
+        The third-party services we rely on include payment processors, cloud infrastructure
+        providers, email delivery services and upstream intelligence providers. Each operates under
+        its own privacy policy and under data processing agreements with us.
+      </p>
+    </div>
+</section>
+
+<section class="doc-section" id="children">
+  <div class="sec-head">
+    <div class="sec-kicker"><span class="sec-num">10</span><span class="sec-rule"></span></div>
+    <h2 class="sec-title">Children's privacy</h2>
+  </div>
+  <div class="prose">
+      <p>
+        eyegod.cc is not directed to individuals under the age of 18, and we do not knowingly
+        collect personal information from minors. If you believe we have inadvertently collected
+        information from someone under 18, contact us immediately at
+        <a href="mailto:support@eyegod.cc">support@eyegod.cc</a> and we will delete it promptly.
+      </p>
+    </div>
+</section>
+
+<section class="doc-section" id="changes">
+  <div class="sec-head">
+    <div class="sec-kicker"><span class="sec-num">11</span><span class="sec-rule"></span></div>
+    <h2 class="sec-title">Changes to this policy</h2>
+  </div>
+  <div class="prose">
+      <p>
+        We may update this Privacy Policy from time to time. When we do, we revise the
+        <em>Effective as of</em> date at the top of this page.
+      </p>
+      <div class="callout co-info"><i data-lucide="bell"></i><div class="co-body"><span class="co-title">Notice of significant changes</span>For material changes we notify you by email or through a prominent notice on the platform at least <strong>14 days</strong> before the change takes effect. Continued use after that date constitutes acceptance of the revised policy.</div></div>
+      <p>
+        We encourage you to review this page periodically. Previous versions are available on
+        request from <a href="mailto:support@eyegod.cc">support@eyegod.cc</a>.
+      </p>
+    </div>
+</section>
+
+<section class="doc-section" id="contact">
+  <div class="sec-head">
+    <div class="sec-kicker"><span class="sec-num">12</span><span class="sec-rule"></span></div>
+    <h2 class="sec-title">Contact us</h2>
+  </div>
+  <div class="prose">
+      <p>
+        Questions, concerns or requests related to your privacy? Reach us through either official
+        channel below. These are our only support channels — be cautious of impersonators.
+      </p>
+      <div class="legal-contact">
+  <a class="contact-card" href="mailto:support@eyegod.cc">
+    <div class="icon-box"><i data-lucide="mail"></i></div>
+    <div>
+      <div class="contact-name">Email</div>
+      <div class="contact-val">support@eyegod.cc</div>
+    </div>
+  </a>
+  <a class="contact-card" href="https://t.me/eyegodupdates" target="_blank" rel="noopener">
+    <div class="icon-box"><i data-lucide="send"></i></div>
+    <div>
+      <div class="contact-name">Telegram</div>
+      <div class="contact-val">t.me/eyegodupdates</div>
+    </div>
+  </a>
+</div>
+      <div class="callout co-accent"><i data-lucide="user-check"></i><div class="co-body"><span class="co-title">Privacy requests</span>For access, correction, deletion or portability requests, email us from the address registered to your account and state clearly which right you are exercising. We respond within 30 days.</div></div>
+    </div>
+</section>
+
+      <div class="legal-endnote">
+        <span>Last updated: January 1, 2026 · eyegod.cc</span>
+      </div>
+
+    </main>
+
+    <aside class="legal-toc">
+      <div class="legal-toc-inner">
+        <p class="legal-toc-title">Contents</p>
+        <ul><li><a href="#intro"><span class="n">—</span><span>Introduction</span></a></li><li><a href="#collect"><span class="n">01</span><span>Information we collect</span></a></li><li><a href="#use"><span class="n">02</span><span>How we use your information</span></a></li><li><a href="#sharing"><span class="n">03</span><span>Data sharing &amp; disclosure</span></a></li><li><a href="#cookies"><span class="n">04</span><span>Cookies &amp; tracking</span></a></li><li><a href="#retention"><span class="n">05</span><span>Data retention</span></a></li><li><a href="#security"><span class="n">06</span><span>Data security</span></a></li><li><a href="#rights"><span class="n">07</span><span>Your privacy rights</span></a></li><li><a href="#transfers"><span class="n">08</span><span>International transfers</span></a></li><li><a href="#third-party"><span class="n">09</span><span>Third-party services</span></a></li><li><a href="#children"><span class="n">10</span><span>Children's privacy</span></a></li><li><a href="#changes"><span class="n">11</span><span>Changes to this policy</span></a></li><li><a href="#contact"><span class="n">12</span><span>Contact us</span></a></li></ul>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <footer id="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="/logo.png" alt="EyeGod" />
+          </div>
+          <p class="footer-tagline">The most powerful OSINT platform for digital investigations.</p>
+          <div class="footer-socials">
+            <a class="footer-social-btn" href="https://t.me/eyegodupdates" target="_blank" rel="noopener" aria-label="Telegram"><i data-lucide="send"></i></a>
+            <a class="footer-social-btn" href="#" aria-label="Discord"><i data-lucide="message-circle"></i></a>
+            <a class="footer-social-btn" href="mailto:support@eyegod.cc" aria-label="Email"><i data-lucide="mail"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-col-title">Product</p>
+          <ul>
+            <li><a href="index.html#why-section"><i data-lucide="sparkles"></i>Features</a></li>
+            <li><a href="index.html#pricing-section"><i data-lucide="credit-card"></i>Pricing</a></li>
+            <li><a href="docs.html"><i data-lucide="code-xml"></i>Developer API</a></li>
+            <li><a href="index.html#marquee-section"><i data-lucide="database"></i>Databases</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-col-title">Company</p>
+          <ul>
+            <li><a href="faq.html"><i data-lucide="circle-help"></i>FAQ</a></li>
+            <li><a href="docs.html"><i data-lucide="book-open"></i>API Docs</a></li>
+            <li><a href="privacy.html"><i data-lucide="lock"></i>Privacy Policy</a></li>
+            <li><a href="terms.html"><i data-lucide="file-text"></i>Terms of Service</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-col-title">Community</p>
+          <ul>
+            <li><a href="https://t.me/eyegodupdates" target="_blank" rel="noopener"><i data-lucide="send"></i>Telegram</a></li>
+            <li><a href="#"><i data-lucide="message-circle"></i>Discord</a></li>
+            <li><a href="mailto:support@eyegod.cc"><i data-lucide="life-buoy"></i>Support</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <span class="footer-copyright">© 2026 eyegod.cc — All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <button id="to-top" aria-label="Back to top"><i data-lucide="arrow-up"></i></button>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+
+    /* ── Lucide icons ── */
+    function paintIcons() {
+      if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons({ attrs: { 'stroke-width': 2 } });
+        return true;
+      }
+      return false;
+    }
+    if (!paintIcons()) {
+      var tries = 0;
+      var iv = setInterval(function () {
+        if (paintIcons() || ++tries > 60) clearInterval(iv);
+      }, 100);
+    }
+    window.__paintIcons = paintIcons;
+
+    /* ── Mobile hamburger ── */
+    var burger = document.getElementById('hamburger-btn');
+    var menu   = document.getElementById('mobile-menu');
+    var iMenu  = document.getElementById('icon-menu');
+    var iX     = document.getElementById('icon-x');
+    if (burger && menu) {
+      burger.addEventListener('click', function () {
+        var open = menu.classList.toggle('open');
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (iMenu) iMenu.style.display = open ? 'none' : 'block';
+        if (iX)    iX.style.display    = open ? 'block' : 'none';
+      });
+      menu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          menu.classList.remove('open');
+          burger.setAttribute('aria-expanded', 'false');
+          if (iMenu) iMenu.style.display = 'block';
+          if (iX)    iX.style.display    = 'none';
+        });
+      });
+    }
+
+    /* ── Syntax highlighting (single-pass, brand palette) ── */
+    var GRAMMAR = {
+      bash: [
+        ['com',  /#[^\n]*/],
+        ['str',  /'(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*"/],
+        ['key',  /\b(?:curl|echo|export|cd|if|then|fi|for|do|done|while|sudo|npm|pip|python3?|node|php|go|jq)\b/],
+        ['flag', /(?:^|\s)(?:--?[A-Za-z][\w-]*)/],
+        ['num',  /\b\d+(?:\.\d+)?\b/]
+      ],
+      json: [
+        ['com',  /\/\/[^\n]*/],
+        ['prop', /"(?:\\.|[^"\\])*"(?=\s*:)/],
+        ['str',  /"(?:\\.|[^"\\])*"/],
+        ['bool', /\b(?:true|false|null)\b/],
+        ['num',  /-?\b\d+(?:\.\d+)?(?:[eE][+-]?\d+)?\b/],
+        ['pun',  /[{}\[\],:]/]
+      ],
+      javascript: [
+        ['com',  /\/\/[^\n]*|\/\*[\s\S]*?\*\//],
+        ['str',  /`(?:\\.|\$\{[^}]*\}|[^`\\])*`|'(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*"/],
+        ['key',  /\b(?:const|let|var|async|await|function|return|if|else|new|throw|try|catch|require|import|from|export|default|for|of|in|class|typeof|delete)\b/],
+        ['bool', /\b(?:true|false|null|undefined)\b/],
+        ['num',  /\b\d+(?:\.\d+)?\b/],
+        ['fn',   /\b[A-Za-z_$][\w$]*(?=\s*\()/],
+        ['pun',  /[{}\[\]();,.]/]
+      ],
+      python: [
+        ['com',  /#[^\n]*/],
+        ['str',  /[frbu]{0,2}(?:'{3}[\s\S]*?'{3}|"{3}[\s\S]*?"{3}|'(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*")/],
+        ['key',  /\b(?:import|from|def|return|if|elif|else|for|while|in|not|and|or|with|as|class|try|except|finally|raise|lambda|pass|yield|async|await)\b/],
+        ['bool', /\b(?:True|False|None)\b/],
+        ['num',  /\b\d+(?:\.\d+)?\b/],
+        ['fn',   /\b[A-Za-z_][\w]*(?=\s*\()/],
+        ['pun',  /[{}\[\]();,:.]/]
+      ],
+      php: [
+        ['com',  /\/\/[^\n]*|#[^\n]*|\/\*[\s\S]*?\*\//],
+        ['str',  /'(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*"/],
+        ['key',  /\b(?:function|return|if|else|foreach|as|new|echo|print_r|true|false|null|use|class|public|private|array)\b/i],
+        ['var',  /\$[A-Za-z_]\w*/],
+        ['num',  /\b\d+(?:\.\d+)?\b/],
+        ['fn',   /\b[A-Za-z_]\w*(?=\s*\()/],
+        ['pun',  /[{}\[\]();,.=>]/]
+      ],
+      go: [
+        ['com',  /\/\/[^\n]*/],
+        ['str',  /`[^`]*`|"(?:\\.|[^"\\])*"/],
+        ['key',  /\b(?:package|import|func|return|if|else|for|range|var|const|type|struct|defer|nil|err|go|map)\b/],
+        ['bool', /\b(?:true|false|nil)\b/],
+        ['num',  /\b\d+(?:\.\d+)?\b/],
+        ['fn',   /\b[A-Za-z_]\w*(?=\s*\()/],
+        ['pun',  /[{}\[\]();,.:]/]
+      ],
+      http: [
+        ['com',  /#[^\n]*/],
+        ['key',  /^(?:GET|POST|PUT|PATCH|DELETE|HEAD)\b/m],
+        ['prop', /^[A-Za-z][\w-]*(?=:)/m],
+        ['str',  /"(?:\\.|[^"\\])*"/],
+        ['num',  /\b\d+(?:\.\d+)?\b/]
+      ]
+    };
+    GRAMMAR.js = GRAMMAR.javascript;
+    GRAMMAR.py = GRAMMAR.python;
+    GRAMMAR.sh = GRAMMAR.bash;
+    GRAMMAR.shell = GRAMMAR.bash;
+
+    function esc(s) {
+      return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function highlight(src, lang) {
+      var rules = GRAMMAR[lang];
+      if (!rules) return esc(src);
+      var parts = [], names = [];
+      rules.forEach(function (r) {
+        names.push(r[0]);
+        parts.push('(' + r[1].source + ')');
+      });
+      var re = new RegExp(parts.join('|'), 'gm');
+      var out = '', last = 0, m;
+      while ((m = re.exec(src)) !== null) {
+        if (m.index > last) out += esc(src.slice(last, m.index));
+        var cls = null;
+        for (var i = 1; i < m.length; i++) {
+          if (m[i] !== undefined) { cls = names[i - 1]; break; }
+        }
+        var txt = m[0];
+        /* keep leading whitespace outside the span for bash flags */
+        if (cls === 'flag') {
+          var lead = txt.match(/^\s*/)[0];
+          out += esc(lead) + '<span class="tok-flag">' + esc(txt.slice(lead.length)) + '</span>';
+        } else {
+          out += '<span class="tok-' + cls + '">' + esc(txt) + '</span>';
+        }
+        last = m.index + txt.length;
+        if (txt.length === 0) re.lastIndex++;
+      }
+      out += esc(src.slice(last));
+      return out;
+    }
+
+    document.querySelectorAll('pre > code[data-lang]').forEach(function (code) {
+      var lang = code.getAttribute('data-lang');
+      var raw  = code.textContent.replace(/^\n/, '').replace(/\s+$/, '');
+      code.setAttribute('data-raw', raw);
+      code.innerHTML = highlight(raw, lang);
+    });
+
+    /* ── Copy buttons ── */
+    document.querySelectorAll('.copy-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var block = btn.closest('.code-block');
+        if (!block) return;
+        var pane = block.querySelector('.code-pane.active') || block;
+        var code = pane.querySelector('code');
+        if (!code) return;
+        var text = code.getAttribute('data-raw') || code.textContent;
+        var done = function () {
+          var old = btn.innerHTML;
+          btn.classList.add('copied');
+          btn.innerHTML = '<i data-lucide="check"></i><span>Copied</span>';
+          paintIcons();
+          setTimeout(function () {
+            btn.classList.remove('copied');
+            btn.innerHTML = old;
+            paintIcons();
+          }, 1600);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done).catch(function(){ fallback(text, done); });
+        } else { fallback(text, done); }
+      });
+    });
+    function fallback(text, cb) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); cb(); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+
+    /* ── Code language tabs ── */
+    document.querySelectorAll('.code-block[data-tabs]').forEach(function (block) {
+      var tabs  = block.querySelectorAll('.code-tab');
+      var panes = block.querySelectorAll('.code-pane');
+      tabs.forEach(function (tab, i) {
+        tab.addEventListener('click', function () {
+          tabs.forEach(function (t) { t.classList.remove('active'); });
+          panes.forEach(function (p) { p.classList.remove('active'); });
+          tab.classList.add('active');
+          if (panes[i]) panes[i].classList.add('active');
+        });
+      });
+    });
+
+    /* ── Glow on hover (ported from the landing page) ── */
+    (function () {
+      var PROXIMITY = 64, INACTIVE_ZONE = 0.01, DURATION = 2;
+      function bezier(x1, y1, x2, y2) {
+        var cx = 3*x1, bx = 3*(x2-x1)-cx, ax = 1-cx-bx;
+        var cy = 3*y1, by = 3*(y2-y1)-cy, ay = 1-cy-by;
+        var sx = function(t){ return ((ax*t+bx)*t+cx)*t; };
+        var sy = function(t){ return ((ay*t+by)*t+cy)*t; };
+        var dx = function(t){ return (3*ax*t+2*bx)*t+cx; };
+        function solve(x){
+          var t = x;
+          for (var i=0;i<8;i++){ var e = sx(t)-x; if (Math.abs(e)<1e-6) return t; var d = dx(t); if (Math.abs(d)<1e-6) break; t -= e/d; }
+          var lo=0, hi=1; t=x;
+          while (lo<hi){ var v=sx(t); if (Math.abs(v-x)<1e-6) return t; if (x>v) lo=t; else hi=t; t=(lo+hi)/2; }
+          return t;
+        }
+        return function(x){ return x<=0?0:x>=1?1:sy(solve(x)); };
+      }
+      var ease = bezier(0.16, 1, 0.3, 1);
+      function animate(from, to, dur, cb) {
+        var id, start = performance.now();
+        function frame(now) {
+          var p = Math.min((now-start)/(dur*1000), 1);
+          cb(from + (to-from)*ease(p));
+          if (p < 1) id = requestAnimationFrame(frame);
+        }
+        id = requestAnimationFrame(frame);
+        return { stop: function(){ cancelAnimationFrame(id); } };
+      }
+      var nodes = document.querySelectorAll('.glow-container');
+      if (!nodes.length) return;
+      nodes.forEach(function (el) {
+        var last = { x: 0, y: 0 }, raf = 0, cur = null;
+        function move(e) {
+          if (raf) cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(function () {
+            var r = el.getBoundingClientRect();
+            var mx = e ? e.x : last.x, my = e ? e.y : last.y;
+            if (e) { last.x = mx; last.y = my; }
+            var cx = r.left + r.width*0.5, cy = r.top + r.height*0.5;
+            var dist = Math.hypot(mx-cx, my-cy);
+            if (dist < 0.5*Math.min(r.width, r.height)*INACTIVE_ZONE) { el.style.setProperty('--active','0'); return; }
+            var on = mx > r.left-PROXIMITY && mx < r.left+r.width+PROXIMITY &&
+                     my > r.top-PROXIMITY  && my < r.top+r.height+PROXIMITY;
+            el.style.setProperty('--active', on ? '1' : '0');
+            if (!on) return;
+            var a0 = parseFloat(el.style.getPropertyValue('--start')) || 0;
+            var a1 = (180*Math.atan2(my-cy, mx-cx))/Math.PI + 90;
+            var diff = ((a1 - a0 + 180) % 360) - 180;
+            if (cur) cur.stop();
+            cur = animate(a0, a0 + diff, DURATION, function (v) { el.style.setProperty('--start', String(v)); });
+          });
+        }
+        window.addEventListener('scroll', function(){ move(); }, { passive: true });
+        document.body.addEventListener('pointermove', function(e){ move(e); }, { passive: true });
+      });
+    })();
+
+    /* ── Back to top ── */
+    var top = document.getElementById('to-top');
+    if (top) {
+      var onScroll = function () { top.classList.toggle('show', window.scrollY > 700); };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+      top.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    }
+
+  });
+  </script>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var links = {};
+    document.querySelectorAll('.legal-toc a').forEach(function (a) {
+      links[a.getAttribute('href').slice(1)] = a;
+    });
+    var ids = Object.keys(links);
+
+    function spy() {
+      var best = null, bestTop = -Infinity;
+      var probe = window.innerHeight * 0.30;
+      ids.forEach(function (id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        var top = el.getBoundingClientRect().top;
+        if (top <= probe && top > bestTop) { bestTop = top; best = id; }
+      });
+      if (!best && ids.length) best = ids[0];
+      ids.forEach(function (id) { links[id].classList.toggle('active', id === best); });
+    }
+    window.addEventListener('scroll', spy, { passive: true });
+    window.addEventListener('resize', spy, { passive: true });
+    spy();
+
+    var jump = document.getElementById('legal-jump');
+    if (jump) {
+      jump.addEventListener('change', function () {
+        var el = document.getElementById(jump.value);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+  });
+  </script>
+
+</body>
+</html>

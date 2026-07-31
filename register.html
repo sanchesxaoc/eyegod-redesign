@@ -1,0 +1,864 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000000" />
+    <title>Sign up · EyeGod</title>
+
+    <!-- Inter -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/400.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/500.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/600.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/700.css" />
+    <!-- Montserrat -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5/400.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5/500.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5/600.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/montserrat@5/700.css" />
+    <!-- JetBrains Mono -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5/400.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5/500.css" />
+
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { width: 100%; min-height: 100%; background: #000; color: #f0f0f0; -webkit-font-smoothing: antialiased; }
+      button, input { font: inherit; cursor: pointer; }
+      a { color: inherit; text-decoration: none; }
+
+      :root {
+        font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+        --outline: rgba(255,255,255,.10);
+        --muted: rgba(255,255,255,.42);
+      }
+
+      /* ── Auth navbar ── */
+      .mini-navbar {
+        position: absolute;
+        z-index: 100;
+        top: 20px;
+        left: 50%;
+        display: flex;
+        width: calc(100% - 64px);
+        max-width: 1180px;
+        flex-direction: column;
+        padding: 10px 18px;
+        border: 1px solid rgba(255,255,255,.08);
+        border-radius: 999px;
+        background: rgba(255,255,255,.025);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        transform: translateX(-50%);
+      }
+      .navbar-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 36px;
+      }
+      .nav-brand { display: block; line-height: 0; }
+      .nav-brand img {
+        display: block;
+        width: auto;
+        height: 30px;
+        filter: brightness(0) invert(1);
+      }
+      .desktop-nav, .desktop-actions { display: flex; align-items: center; }
+      .desktop-nav { gap: 24px; margin-left: auto; margin-right: 28px; }
+      .nav-link {
+        color: rgba(255,255,255,.55);
+        font-size: 13px;
+        transition: color .2s;
+      }
+      .nav-link:hover { color: #f0f0f0; }
+      .desktop-actions { gap: 8px; }
+      .btn-nav-login, .btn-nav-signup {
+        height: 32px;
+        padding: 0 14px;
+        border-radius: 999px;
+        font-size: 13px;
+        transition: background .2s, border-color .2s, color .2s;
+      }
+      .btn-nav-login {
+        border: 1px solid rgba(255,255,255,.10);
+        color: rgba(255,255,255,.75);
+        background: transparent;
+      }
+      .btn-nav-signup {
+        border: 1px solid transparent;
+        color: #000;
+        background: #f0f0f0;
+      }
+      .btn-nav-login:hover { color: #fff; background: rgba(255,255,255,.08); }
+      .btn-nav-signup:hover { background: #fff; }
+      .menu-toggle, .mobile-menu { display: none; }
+
+      .signin-page {
+        position: relative;
+        isolation: isolate;
+        width: 100%;
+        min-height: 100svh;
+        overflow: hidden;
+        background: #000;
+      }
+
+      /* Subtle top gradient */
+      .backdrop-top {
+        position: absolute;
+        z-index: -1;
+        inset: 0 0 auto;
+        height: 34%;
+        background: linear-gradient(to bottom, rgba(255,245,245,.03) 0%, transparent 100%);
+        pointer-events: none;
+      }
+
+      /* ── Navbar ── */
+      nav { position: relative; z-index: 100; flex-shrink: 0; }
+      .signin-page > nav { position: absolute; top: 0; left: 0; width: 100%; }
+      .nav-row { display: flex; align-items: center; justify-content: space-between; padding: 20px 20px; }
+      @media (min-width: 768px) { .nav-row { padding: 20px 32px; } }
+      .nav-logo img { height: 28px; object-fit: contain; display: block; filter: brightness(0) invert(1); transform: scale(2.4); transform-origin: left center; }
+      @media (min-width: 768px) { .nav-logo img { transform: scale(3.5); } }
+      .nav-center { display: none; align-items: center; gap: 4px; }
+      @media (min-width: 768px) { .nav-center { display: flex; } }
+      .nav-btn { display: flex; align-items: center; gap: 4px; border-radius: 6px; padding: 8px 12px; font-size: 14px; font-weight: 500; color: #b0b0b0; background: transparent; border: none; cursor: pointer; transition: color 150ms; }
+      .nav-btn:hover { color: #ffffff; }
+      .nav-btn svg { opacity: 0.6; flex-shrink: 0; }
+      .nav-right { display: flex; align-items: center; gap: 12px; }
+      .btn-signup { display: none; border-radius: 9999px; padding: 8px 16px; font-size: 14px; font-weight: 500; color: #d0d0d0; cursor: pointer; transition: color 150ms, background 150ms; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); text-decoration: none !important; }
+      @media (min-width: 768px) { .btn-signup { display: block; } }
+      .btn-signup:hover { color: #ffffff; background: rgba(255,255,255,0.06) !important; border-color: rgba(255,255,255,0.08); }
+      .btn-hamburger { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 6px; background: transparent; border: none; cursor: pointer; color: #b0b0b0; transition: color 150ms; }
+      @media (min-width: 768px) { .btn-hamburger { display: none; } }
+      .btn-hamburger:hover { color: #ffffff; }
+      .nav-divider { height: 1px; margin: 3px 20px 0; background: linear-gradient(to right, transparent, rgba(255,245,245,0.18), transparent); }
+      @media (min-width: 768px) { .nav-divider { margin: 3px 32px 0; } }
+      #mobile-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; padding: 12px 20px 24px; gap: 4px; background: rgba(0,0,0,0.3); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); z-index: 200; border-bottom: 1px solid rgba(255,255,255,0.04); }
+      #mobile-menu.open { display: flex; animation: slideDown 0.3s ease-out; }
+      @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+      @media (min-width: 768px) { #mobile-menu { display: none !important; } }
+      .mobile-nav-btn { display: flex; align-items: center; justify-content: space-between; width: 100%; border-radius: 8px; padding: 14px 16px; font-size: 15px; font-weight: 500; color: #e8e8e8; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.04); cursor: pointer; text-align: left; transition: background 150ms, color 150ms, border-color 150ms; }
+      .mobile-nav-btn:hover { color: #ffffff; background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.08); }
+      .mobile-nav-btn svg { opacity: 0.4; flex-shrink: 0; }
+      .mobile-divider { height: 1px; margin: 6px 0 8px; background: rgba(255,255,255,0.06); }
+      .btn-signup-mobile { display: block; border-radius: 9999px; padding: 14px 16px; font-size: 15px; font-weight: 500; color: #e8e8e8; cursor: pointer; width: 100%; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.04); transition: background 150ms, border-color 150ms, color 150ms; text-align: center; text-decoration: none !important; margin-top: 4px; }
+      .btn-signup-mobile:hover { color: #ffffff; background: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.15); }
+
+      /* ── Content ── */
+      .content-shell {
+        display: flex;
+        min-height: 100svh;
+        align-items: center;
+        justify-content: center;
+      }
+      .form-column {
+        display: flex;
+        width: 100%;
+        max-width: 420px;
+        padding: 120px 24px 48px;
+        align-items: center;
+        justify-content: center;
+      }
+      .auth-card { width: 100%; }
+      .auth-step { text-align: center; }
+      .auth-step.is-visible  { animation: slideFromLeft  .42s ease-out both; }
+      .auth-step.enter-right { animation: slideFromRight .42s ease-out both; }
+      .auth-step.enter-left  { animation: slideFromLeft  .42s ease-out both; }
+      @keyframes slideFromLeft  { from { opacity: 0; transform: translateX(-60px); } to { opacity: 1; transform: translateX(0); } }
+      @keyframes slideFromRight { from { opacity: 0; transform: translateX(60px);  } to { opacity: 1; transform: translateX(0); } }
+
+      /* Progress dots */
+      .progress-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-bottom: 28px;
+      }
+      .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgba(255,255,255,.18);
+        transition: background .3s, transform .3s;
+      }
+      .dot.active {
+        background: #f0f0f0;
+        transform: scale(1.3);
+      }
+      .dot.done {
+        background: rgba(255,255,255,.5);
+      }
+
+      /* Heading */
+      .heading-group { margin-bottom: 24px; }
+      .heading-group h1 {
+        font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+        font-size: 38px;
+        font-weight: 600;
+        letter-spacing: -0.05em;
+        line-height: 1.08;
+        color: #f0f0f0;
+      }
+      .heading-group p {
+        margin: 6px 0 0;
+        font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 1.3;
+        color: rgba(255,255,255,.42);
+        letter-spacing: -0.02em;
+      }
+
+      /* Input field */
+      .field-wrap { position: relative; margin-bottom: 12px; }
+      .field-wrap input {
+        display: block;
+        width: 100%;
+        height: 50px;
+        padding: 0 52px 0 18px;
+        outline: none;
+        border: 1px solid var(--outline);
+        border-radius: 999px;
+        color: #f0f0f0;
+        background: rgba(255,255,255,.03);
+        font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+        font-size: 15px;
+        text-align: center;
+        caret-color: #f0f0f0;
+        transition: border-color .2s;
+      }
+      .field-wrap input::placeholder { color: rgba(255,255,255,.38); opacity: 1; }
+      .field-wrap input:focus { border-color: rgba(255,255,255,.28); }
+      .field-icon {
+        position: absolute;
+        top: 50%; left: 18px;
+        width: 18px; height: 18px;
+        transform: translateY(-50%);
+        stroke: rgba(255,255,255,.45);
+        stroke-width: 1.7;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        pointer-events: none;
+        fill: none;
+      }
+      .submit-btn {
+        position: absolute;
+        top: 7px; right: 7px;
+        display: grid;
+        width: 36px; height: 36px;
+        place-items: center;
+        border: 0;
+        border-radius: 50%;
+        color: #f0f0f0;
+        background: rgba(255,255,255,.08);
+        transition: background .2s;
+      }
+      .submit-btn:hover { background: rgba(255,255,255,.18); }
+      .submit-btn svg {
+        width: 18px; height: 18px;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+        transition: transform .22s ease;
+      }
+      .submit-btn:hover svg { transform: translateX(2px); }
+
+      /* Actions row (back + continue) */
+      .step-actions { display: flex; gap: 10px; }
+      .back-button, .continue-button {
+        height: 48px;
+        border-radius: 999px;
+        font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+        font-weight: 500;
+        font-size: 15px;
+        transition: transform .2s, background .2s, color .2s;
+      }
+      .back-button:hover:not(:disabled), .continue-button:not(:disabled):hover { transform: scale(1.02); }
+      .back-button {
+        width: 30%;
+        border: 1px solid rgba(255,255,255,.12);
+        color: rgba(255,255,255,.75);
+        background: rgba(255,255,255,.05);
+      }
+      .back-button:hover { background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.25); }
+      .continue-button {
+        flex: 1;
+        border: 1px solid var(--outline);
+        color: rgba(255,255,255,.38);
+        background: rgba(255,255,255,.04);
+      }
+      .continue-button:not(:disabled) {
+        border-color: transparent;
+        color: #000;
+        background: #f0f0f0;
+      }
+      .continue-button:disabled { cursor: not-allowed; }
+
+      /* Recovery key */
+      .recovery-step {
+        width: 100%;
+        max-width: 420px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .recovery-heading {
+        margin-bottom: 24px;
+      }
+      .recovery-heading h1 {
+        font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+        color: #f0f0f0;
+        font-size: 30px;
+        font-weight: 600;
+        letter-spacing: -0.05em;
+        line-height: 1.1;
+      }
+      .recovery-heading p {
+        max-width: 300px;
+        margin: 8px auto 0;
+        color: rgba(255,255,255,.45);
+        font-size: 15px;
+        line-height: 1.45;
+      }
+      .recovery-key-label {
+        display: block;
+        margin-bottom: 8px;
+        color: rgba(255,255,255,.6);
+        font-size: 12px;
+        letter-spacing: .08em;
+        text-align: left;
+        text-transform: uppercase;
+      }
+      .recovery-key-row {
+        display: flex;
+        align-items: stretch;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,.12);
+        border-radius: 12px;
+        background: rgba(255,255,255,.03);
+      }
+      .recovery-key {
+        display: block;
+        width: 100%;
+        min-height: 76px;
+        padding: 13px 14px;
+        resize: none;
+        outline: none;
+        border: 0;
+        color: #f0f0f0;
+        background: transparent;
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        font-size: 12px;
+        letter-spacing: .035em;
+        line-height: 1.55;
+        user-select: all;
+      }
+      .recovery-copy {
+        display: grid;
+        width: 48px;
+        flex: 0 0 48px;
+        place-items: center;
+        border: 0;
+        border-left: 1px solid rgba(255,255,255,.10);
+        color: rgba(255,255,255,.62);
+        background: rgba(255,255,255,.04);
+        cursor: pointer;
+        transition: color .2s, background .2s;
+      }
+      .recovery-copy:hover {
+        color: #fff;
+        background: rgba(255,255,255,.10);
+      }
+      .recovery-copy.copied { color: #b9f6d1; }
+      .recovery-copy svg { width: 17px; height: 17px; }
+      .recovery-warning {
+        margin: 10px 0 22px;
+        color: rgba(255,255,255,.34);
+        font-size: 12px;
+        line-height: 1.45;
+      }
+      .recovery-continue {
+        width: 100%;
+      }
+
+      /* Legal */
+      .legal {
+        max-width: 360px;
+        margin: 28px auto 0;
+        font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+        color: rgba(255,255,255,.28);
+        font-size: 11.5px;
+        line-height: 1.55;
+      }
+      .legal a { text-decoration: underline; text-underline-offset: 2px; transition: color .2s; }
+      .legal a:hover { color: rgba(255,255,255,.55); }
+
+      /* Success screen */
+      .success-screen {
+        position: fixed;
+        z-index: 2;
+        top: 50%; left: 50%;
+        width: max-content;
+        max-width: calc(100% - 48px);
+        text-align: left;
+        transform: translate(-50%, -50%);
+      }
+      .success-screen .blur-fade { opacity: 0; filter: blur(10px); transform: translateY(14px); }
+      .success-screen .blur-fade.visible { animation: success-blur-fade .85s cubic-bezier(.23,1,.32,1) both; }
+      .success-screen .blur-fade.fade-out { animation: success-fade-out .55s cubic-bezier(.4,0,1,1) both; }
+      @keyframes success-blur-fade { from { opacity:0; filter:blur(10px); transform:translateY(14px); } to { opacity:1; filter:blur(0); transform:translateY(0); } }
+      @keyframes success-fade-out  { from { opacity:1; filter:blur(0); transform:translateY(0); } to { opacity:0; filter:blur(7px); transform:translateY(-7px); } }
+      .success-screen h2 {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 0 4px;
+        font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+        color: #f0f0f0;
+        font-size: 32px;
+        font-weight: 600;
+        letter-spacing: -0.04em;
+        line-height: 1.15;
+        white-space: nowrap;
+      }
+      .success-screen p {
+        font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+        margin: 0;
+        color: rgba(255,255,255,.55);
+        font-size: 18px;
+        font-weight: 400;
+        letter-spacing: -.01em;
+        line-height: 1.3;
+      }
+      .success-redirect {
+        position: fixed;
+        z-index: 2;
+        bottom: max(22px, env(safe-area-inset-bottom));
+        left: 50%;
+        width: max-content;
+        max-width: calc(100% - 48px);
+        font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+        color: rgba(255,255,255,.35);
+        font-size: 12px;
+        font-weight: 400;
+        text-align: center;
+        opacity: 0;
+        filter: blur(6px);
+        transform: translate(-50%, 7px);
+      }
+      .success-redirect.visible { animation: redirect-fade-in .65s cubic-bezier(.23,1,.32,1) both; }
+      .success-redirect.fade-out { animation: redirect-fade-out .55s cubic-bezier(.4,0,1,1) both; }
+      @keyframes redirect-fade-in  { from { opacity:0; filter:blur(6px); transform:translate(-50%,7px); } to { opacity:1; filter:blur(0); transform:translate(-50%,0); } }
+      @keyframes redirect-fade-out { from { opacity:1; filter:blur(0); transform:translate(-50%,0); } to { opacity:0; filter:blur(6px); transform:translate(-50%,-7px); } }
+      .success-redirect span { display: inline-block; min-width: 16px; color: rgba(255,255,255,.55); font-variant-numeric: tabular-nums; }
+      .success-wave { display: inline-block; width: 1.1em; height: 1.1em; vertical-align: -.15em; }
+
+      /* ── Responsive ── */
+      @media (max-width: 640px) {
+        .mini-navbar { top: 16px; width: calc(100% - 24px); min-width: 0; padding: 10px 16px; }
+        .mini-navbar.open { border-radius: 18px; }
+        .desktop-nav, .desktop-actions { display: none; }
+        .menu-toggle {
+          display: grid;
+          width: 32px; height: 32px;
+          place-items: center;
+          border: 0;
+          background: transparent;
+          color: rgba(255,255,255,.55);
+        }
+        .menu-toggle svg { width: 22px; height: 22px; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2; position: absolute; transition: opacity .15s; }
+        .close-icon { opacity: 0; }
+        .mini-navbar.open .hamburger-icon { opacity: 0; }
+        .mini-navbar.open .close-icon { opacity: 1; }
+        .mobile-menu {
+          display: flex;
+          flex-direction: column;
+          max-height: 0;
+          opacity: 0;
+          overflow: hidden;
+          pointer-events: none;
+          transition: max-height .3s ease, opacity .25s ease, padding .3s ease;
+        }
+        .mini-navbar.open .mobile-menu { max-height: 300px; opacity: 1; padding-top: 16px; pointer-events: auto; }
+        .mobile-menu nav { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+        .mobile-menu nav a { font-family: "Inter", ui-sans-serif, system-ui, sans-serif; color: rgba(255,255,255,.55); font-size: 16px; }
+        .mobile-menu nav a:hover { color: #f0f0f0; }
+        .mobile-actions { display: flex; flex-direction: column; gap: 10px; width: 100%; margin-top: 16px; }
+        .mobile-actions button { width: 100%; height: 42px; }
+        .form-column { padding-top: 80px; align-items: flex-start; }
+        .heading-group h1 { font-size: 32px; }
+        .heading-group p { font-size: 16px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="signin-page">
+      <div class="backdrop-top" aria-hidden="true"></div>
+
+      <!-- Navbar (matches the landing page) -->
+      <nav>
+        <div class="nav-row">
+          <div class="nav-logo">
+            <img src="/logo.png" alt="EyeGod" />
+          </div>
+
+          <div class="nav-center">
+            <button class="nav-btn">
+              Features
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <button class="nav-btn">Pricing</button>
+            <button class="nav-btn">FAQ</button>
+            <button class="nav-btn">
+              Status
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+          </div>
+
+          <div class="nav-right">
+            <a href="login.html" class="btn-signup">Sign Up</a>
+            <button class="btn-hamburger" id="hamburger-btn" aria-label="Toggle menu">
+              <svg id="icon-menu" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+              <svg id="icon-x" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="nav-divider"></div>
+
+        <div id="mobile-menu">
+          <button class="mobile-nav-btn">
+            Features
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <button class="mobile-nav-btn">Pricing</button>
+          <button class="mobile-nav-btn">FAQ</button>
+          <button class="mobile-nav-btn">
+            Status
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="mobile-divider"></div>
+          <a href="login.html" class="btn-signup-mobile">Sign Up</a>
+        </div>
+      </nav>
+
+      <!-- Auth form -->
+      <section class="content-shell" aria-live="polite">
+        <div class="form-column">
+          <div class="auth-card" id="auth-card">
+
+            <!-- Progress dots (shared across steps 1-3) -->
+            <div class="progress-dots" id="progress-dots">
+              <span class="dot active" data-step="0"></span>
+              <span class="dot" data-step="1"></span>
+              <span class="dot" data-step="2"></span>
+            </div>
+
+            <!-- Step 1: Display name -->
+            <section class="auth-step is-visible" id="step-name" aria-labelledby="name-heading">
+              <div class="heading-group">
+                <h1 id="name-heading">Create account</h1>
+                <p>What should we call you?</p>
+              </div>
+              <form id="name-form" novalidate>
+                <div class="field-wrap">
+                  <svg class="field-icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                  <input id="display-name" type="text" autocomplete="name" spellcheck="false"
+                    placeholder="Your display name"
+                    required minlength="2" maxlength="32"
+                    aria-label="Display name" />
+                  <button class="submit-btn" type="submit" aria-label="Continue">
+                    <svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+                  </button>
+                </div>
+              </form>
+              <p class="legal">By signing up, you agree to the <a href="#">MSA</a>, <a href="#">Product Terms</a>, <a href="#">Policies</a>, <a href="#">Privacy Notice</a>, and <a href="#">Cookie Notice</a>.</p>
+            </section>
+
+            <!-- Step 2: Username -->
+            <section class="auth-step" id="step-username" aria-labelledby="username-heading" hidden>
+              <div class="heading-group">
+                <h1 id="username-heading">Pick a username</h1>
+                <p>This is your unique handle</p>
+              </div>
+              <form id="username-form" novalidate>
+                <div class="field-wrap">
+                  <svg class="field-icon" viewBox="0 0 24 24" style="stroke:none;fill:rgba(255,255,255,.45);font-family:ui-sans-serif,system-ui,sans-serif;"><text x="12" y="17" text-anchor="middle" font-size="17">@</text></svg>
+                  <input id="username" type="text" autocomplete="username" autocapitalize="none" spellcheck="false"
+                    placeholder="username"
+                    required minlength="3" maxlength="20"
+                    pattern="[a-zA-Z0-9_]+"
+                    aria-label="Username" />
+                  <button class="submit-btn" type="submit" aria-label="Continue">
+                    <svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+                  </button>
+                </div>
+              </form>
+              <div class="step-actions" style="margin-top:12px;">
+                <button class="back-button" id="back-to-name" type="button">Back</button>
+                <button class="continue-button" id="continue-username" type="submit" form="username-form" disabled>Continue</button>
+              </div>
+              <p class="legal">By signing up, you agree to the <a href="#">MSA</a>, <a href="#">Product Terms</a>, <a href="#">Policies</a>, <a href="#">Privacy Notice</a>, and <a href="#">Cookie Notice</a>.</p>
+            </section>
+
+            <!-- Step 3: Password -->
+            <section class="auth-step" id="step-password" aria-labelledby="password-heading" hidden>
+              <div class="heading-group">
+                <h1 id="password-heading">Set a password</h1>
+                <p>Keep your account secure</p>
+              </div>
+              <form id="password-form" novalidate>
+                <div class="field-wrap">
+                  <svg class="field-icon" viewBox="0 0 24 24"><rect x="4.5" y="10" width="15" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15" r="1"/></svg>
+                  <input id="password" type="password" autocomplete="new-password"
+                    placeholder="Your password"
+                    required minlength="6"
+                    aria-label="Password" />
+                </div>
+              </form>
+              <div class="step-actions">
+                <button class="back-button" id="back-to-username" type="button">Back</button>
+                <button class="continue-button" id="continue-password" type="submit" form="password-form" disabled>Create account</button>
+              </div>
+              <p class="legal" style="margin-top:28px;">By signing up, you agree to the <a href="#">MSA</a>, <a href="#">Product Terms</a>, <a href="#">Policies</a>, <a href="#">Privacy Notice</a>, and <a href="#">Cookie Notice</a>.</p>
+            </section>
+
+            <!-- Step 4: Recovery key -->
+            <section class="auth-step recovery-step" id="step-recovery" aria-labelledby="recovery-heading" hidden>
+              <div class="recovery-heading">
+                <h1 id="recovery-heading">Save Recovery Key</h1>
+                <p>This is your only way to reset your password.</p>
+              </div>
+              <label class="recovery-key-label" for="recovery-key">Recovery key</label>
+              <div class="recovery-key-row">
+                <textarea class="recovery-key" id="recovery-key" readonly aria-label="Recovery key"></textarea>
+                <button class="recovery-copy" id="recovery-copy" type="button" aria-label="Copy recovery key" title="Copy recovery key">
+                  <svg id="recovery-copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                </button>
+              </div>
+              <p class="recovery-warning">Store this safely. It will not be shown again.</p>
+              <button class="continue-button recovery-continue" id="recovery-continue" type="button">Copy key to continue</button>
+            </section>
+
+            <!-- Step 5: Success -->
+            <section class="auth-step success-screen" id="step-success" aria-labelledby="success-heading" hidden>
+              <div class="blur-fade" id="success-fade-1">
+                <h2 id="success-heading">Hello, <span id="success-name"></span> <img class="success-wave" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple@latest/img/apple/64/1f44b.png" alt="👋" /></h2>
+              </div>
+              <div class="blur-fade" id="success-fade-2">
+                <p>Nice to meet you.</p>
+              </div>
+            </section>
+            <p class="success-redirect" id="success-redirect" aria-live="polite" hidden>
+              Redirecting to dashboard&nbsp;<span id="dashboard-countdown">5s</span>
+            </p>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+    (() => {
+      // Mobile navbar toggle (same behavior as the landing page)
+      const hamburgerBtn = document.getElementById('hamburger-btn');
+      const mobileMenu   = document.getElementById('mobile-menu');
+      const iconMenu     = document.getElementById('icon-menu');
+      const iconX        = document.getElementById('icon-x');
+
+      hamburgerBtn.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.toggle('open');
+        iconMenu.style.display = isOpen ? 'none' : 'block';
+        iconX.style.display = isOpen ? 'block' : 'none';
+      });
+
+      mobileMenu.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          mobileMenu.classList.remove('open');
+          iconMenu.style.display = 'block';
+          iconX.style.display = 'none';
+        });
+      });
+
+      // Steps
+      const steps = {
+        name:     document.getElementById('step-name'),
+        username: document.getElementById('step-username'),
+        password: document.getElementById('step-password'),
+        recovery: document.getElementById('step-recovery'),
+        success:  document.getElementById('step-success'),
+      };
+      const stepOrder = ['name', 'username', 'password', 'recovery', 'success'];
+      let currentStep = 'name';
+      let recoveryCopied = false;
+
+      // Progress dots
+      const dots = document.querySelectorAll('.progress-dots .dot');
+      function updateDots(stepName) {
+        const idx = stepOrder.indexOf(stepName);
+        dots.forEach((dot, i) => {
+          dot.classList.remove('active', 'done');
+          if (i < idx) dot.classList.add('done');
+          else if (i === idx) dot.classList.add('active');
+        });
+      }
+
+      // Step transition
+      function switchStep(next, direction = 'forward') {
+        if (next === currentStep) return;
+        const out = steps[currentStep];
+        out.hidden = true;
+        out.classList.remove('is-visible', 'enter-right', 'enter-left');
+
+        const inc = steps[next];
+        inc.hidden = false;
+        inc.classList.remove('is-visible', 'enter-right', 'enter-left');
+        void inc.offsetWidth;
+
+        if (next !== 'success') {
+          inc.classList.add(direction === 'forward' ? 'enter-right' : 'enter-left');
+        }
+        currentStep = next;
+        updateDots(next);
+
+        // Hide progress dots once the account creation steps are complete
+        document.getElementById('progress-dots').style.display =
+          (next === 'recovery' || next === 'success') ? 'none' : '';
+
+        // Focus first input in next step
+        const inp = inc.querySelector('input');
+        if (inp) setTimeout(() => inp.focus(), 450);
+
+        if (next === 'success') triggerSuccess();
+      }
+
+      // Forms & fields
+      const nameForm      = document.getElementById('name-form');
+      const displayName   = document.getElementById('display-name');
+      const usernameForm  = document.getElementById('username-form');
+      const usernameField = document.getElementById('username');
+      const continueUser  = document.getElementById('continue-username');
+      const passwordForm  = document.getElementById('password-form');
+      const passwordField = document.getElementById('password');
+      const continuePass  = document.getElementById('continue-password');
+      const recoveryField  = document.getElementById('recovery-key');
+      const recoveryCopy   = document.getElementById('recovery-copy');
+      const recoveryCopyIcon = document.getElementById('recovery-copy-icon');
+      const recoveryContinue = document.getElementById('recovery-continue');
+
+      // Step 1 → 2
+      nameForm.addEventListener('submit', e => {
+        e.preventDefault();
+        if (displayName.value.trim().length >= 2) switchStep('username');
+        else displayName.reportValidity();
+      });
+
+      // Step 2: enable continue
+      usernameField.addEventListener('input', () => {
+        continueUser.disabled = usernameField.value.trim().length < 3;
+      });
+      usernameForm.addEventListener('submit', e => {
+        e.preventDefault();
+        if (!continueUser.disabled) switchStep('password');
+        else usernameField.reportValidity();
+      });
+      continueUser.addEventListener('click', e => {
+        if (!continueUser.disabled && !e.defaultPrevented) switchStep('password');
+      });
+
+      // Step 2 back
+      document.getElementById('back-to-name').addEventListener('click', () => switchStep('name', 'back'));
+
+      // Step 3: enable continue
+      passwordField.addEventListener('input', () => {
+        continuePass.disabled = passwordField.value.length < 6;
+      });
+      passwordForm.addEventListener('submit', e => {
+        e.preventDefault();
+        if (!continuePass.disabled) doRegister();
+      });
+      continuePass.addEventListener('click', e => {
+        if (!continuePass.disabled && !e.defaultPrevented) doRegister();
+      });
+
+      // Step 3 back
+      document.getElementById('back-to-username').addEventListener('click', () => switchStep('username', 'back'));
+
+      function doRegister() {
+        if (currentStep !== 'password') return;
+        recoveryField.value = generateRecoveryKey();
+        recoveryCopied = false;
+        recoveryCopy.classList.remove('copied');
+        recoveryCopyIcon.innerHTML = '<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>';
+        recoveryContinue.textContent = 'Copy key to continue';
+        document.getElementById('success-name').textContent = displayName.value.trim();
+        switchStep('recovery');
+      }
+
+      function generateRecoveryKey() {
+        const bytes = new Uint8Array(32);
+        if (!window.crypto || typeof window.crypto.getRandomValues !== 'function') {
+          throw new Error('Secure recovery key generation is unavailable.');
+        }
+        window.crypto.getRandomValues(bytes);
+        return Array.from(bytes, byte => byte.toString(16).padStart(2, '0')).join('');
+      }
+
+      async function copyRecoveryKey() {
+        const value = recoveryField.value;
+        if (!value) return false;
+
+        try {
+          await navigator.clipboard.writeText(value);
+        } catch {
+          recoveryField.focus();
+          recoveryField.select();
+          if (!document.execCommand('copy')) return false;
+        }
+
+        recoveryCopied = true;
+        recoveryCopy.classList.add('copied');
+        recoveryCopyIcon.innerHTML = '<polyline points="20 6 9 17 4 12"/>';
+        recoveryContinue.textContent = 'Continue';
+        return true;
+      }
+
+      recoveryCopy.addEventListener('click', copyRecoveryKey);
+      recoveryContinue.addEventListener('click', async () => {
+        if (!recoveryCopied) {
+          await copyRecoveryKey();
+          return;
+        }
+        switchStep('success');
+      });
+
+      // Success animation
+      let countdownTimer = null, successTimer = null;
+      function triggerSuccess() {
+        const f1 = document.getElementById('success-fade-1');
+        const f2 = document.getElementById('success-fade-2');
+        const rd = document.getElementById('success-redirect');
+        clearTimeout(successTimer); clearInterval(countdownTimer);
+        rd.hidden = false;
+        [f1, f2, rd].forEach(el => el.classList.remove('visible', 'fade-out'));
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          f1.classList.add('visible');
+          f2.classList.add('visible');
+          rd.classList.add('visible');
+          let s = 5;
+          document.getElementById('dashboard-countdown').textContent = s + 's';
+          countdownTimer = setInterval(() => {
+            s--;
+            document.getElementById('dashboard-countdown').textContent = s > 0 ? s + 's' : '';
+            if (s <= 0) clearInterval(countdownTimer);
+          }, 1000);
+        }));
+        successTimer = setTimeout(() => {
+          [f1, f2, rd].forEach(el => el.classList.add('fade-out'));
+        }, 5000);
+      }
+    })();
+    </script>
+  </body>
+</html>
